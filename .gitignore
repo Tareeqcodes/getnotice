@@ -41,4 +41,4 @@ yarn-error.log*
 next-env.d.ts
 
 .env
-node.md
+note.md
