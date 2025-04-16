@@ -23,6 +23,25 @@ export default function Navbar() {
           </Link>
           
         </motion.div>
+        <div className="flex space-x-28 justify-between">
+        <Link
+            className="hover:text-indigo-500 text-base transition"
+
+          href="/home" >
+            Home
+          </Link >
+           <Link
+            className="hover:text-indigo-500 text-base transition"
+            href="/feed">
+            Feeds
+           </Link>
+           <Link
+            className="hover:text-indigo-500 text-base transition"
+
+          href="/post" >
+            Post 
+          </Link >
+        </div>
         <motion.div 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
