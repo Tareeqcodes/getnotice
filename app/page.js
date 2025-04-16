@@ -1,13 +1,11 @@
 // import Main from "../components/Main";
-import LoginForm from "@/components/LoginForm";
-
+import Search from "@/components/Search";
 
 export default function Home() {
   return (
-    <div>
+    <div className="min-h-screen justify-center text-center">
+      <Search />
       {/* <Main /> */}
-    
-        <LoginForm />
     </div>
   );
 }

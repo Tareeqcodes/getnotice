@@ -7,34 +7,11 @@ import {
   BoltIcon,
   SparklesIcon,
   ChartBarIcon,
-} from "@heroicons/react/24/outline";
-import { Waitlist}    from "./Waitlist";
-
-
+} from "@heroicons/react/24/solid";
 
 export default function Main() {
   return (
     <div className="min-h-screen bg-gray-950 text-white">
-      {/* Navbar */}
-      <nav className="px-6 py-4 flex justify-between items-center">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center space-x-2"
-        >
-          <SparklesIcon className="h-6 w-6 text-indigo-500" />
-          <span className="text-xl font-bold text-white">GetNotice</span>
-        </motion.div>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition"
-        >
-          Join Waitlist
-        </motion.button>
-      </nav>
-
       <div className="container mx-auto px-6 py-20 text-center">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -60,7 +37,6 @@ export default function Main() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Waitlist />
         </motion.div>
       </div>
 
@@ -106,11 +82,6 @@ export default function Main() {
           ))}
         </motion.div>
       </div>
-
-      <footer className="py-8 text-center text-gray-500 text-sm">
-        Built by devs who get the struggle. Coming soon.
-        <p>© {new Date().getFullYear()} GetNotice. Helping junior devs shine.</p>
-      </footer>
     </div>
   );
 }
