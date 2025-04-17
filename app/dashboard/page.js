@@ -17,7 +17,7 @@ export default function Dashboard() {
   if (!user) return null; // Redirect will handle this
 
   return (
-    <div>
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <h1>Welcome, {user.email}</h1>
       <button onClick={() => logout()}>Logout</button>
     </div>

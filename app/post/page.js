@@ -1,36 +1,80 @@
  "use client"
 
 import { useState } from 'react';
+import { databases, ID } from '../../config/appwrite';
+import { toast } from 'react-toastify';
+// import { useAuth } from '@/context/authContext';
 
 export default function PostProject() {
-  const [title, setTitle] = useState('');
-  const [githubUrl, setGithubUrl] = useState('');
-  const [demoUrl, setDemoUrl] = useState('');
-  const [shortDescription, setShortDescription] = useState('');
-  const [detailedWriteup, setDetailedWriteup] = useState('');
-  const [selectedTech, setSelectedTech] = useState(['React']);
+  // const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
 
-  const handleAddTech = (tech) => {
-    if (!selectedTech.includes(tech)) {
-      setSelectedTech([...selectedTech, tech]);
-    }
-  };
-
-  const handleRemoveTech = (tech) => {
-    setSelectedTech(selectedTech.filter(t => t !== tech));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log({
-      title,
-      githubUrl,
-      demoUrl,
-      shortDescription,
-      detailedWriteup,
-      selectedTech
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    githubUrl: '',
+    demoUrl: '',
+    detailedWriteup: '',
+    techStack: '',
+  });
+  const reset = () => {
+    setFormData({
+      title: '',
+      description: '',
+      githubUrl: '',
+      demoUrl: '',
+      detailedWriteup: '',
+      techStack:'' ,
     });
+  };
+  
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const documentData = {
+      title: formData.title,
+      description: formData.description,
+      githubUrl: formData.githubUrl,
+      demoUrl: formData.demoUrl,
+      detailedWriteup: formData.detailedWriteup,
+      techStack: formData.techStack,
+    }
+    
+     try {
+       await databases.createDocument(
+          process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
+          process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID,
+          ID.unique(),
+          documentData,
+
+        );
+        toast.success('Project posted successfully!');
+        alert('Project posted successfully!');
+        reset();
+     } catch (error) {
+        toast.error('Error posting project: ' + error.message);
+     } finally {
+       setLoading(false);
+     }
+     console.log({
+      title: formData.title,
+      description: formData.description,
+      githubUrl: formData.githubUrl,
+      demoUrl: formData.demoUrl,
+      detailedWriteup: formData.detailedWriteup,
+      techStack: formData.techStack,
+    });
+    
   };
 
   return (
@@ -41,121 +85,88 @@ export default function PostProject() {
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">New Project</h2>
           
-          {/* Title */}
           <div className="mb-4">
             <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">Title</label>
             <input
+              name='title'
               type="text"
               id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={formData.title}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Scrohstack"
               required
             />
           </div>
           
-          {/* Tech Stack */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">Tech Stack</label>
-            <div className="flex flex-wrap gap-2 mb-2">
-              {selectedTech.map(tech => (
-                <span 
-                  key={tech} 
-                  className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                >
-                  {tech}
-                  <button 
-                    type="button"
-                    onClick={() => handleRemoveTech(tech)}
-                    className="ml-2 text-blue-600 hover:text-blue-800"
-                  >
-                    ×
-                  </button>
-                </span>
-              ))}
-            </div>
-            <div className="relative">
-              <select
-                onChange={(e) => {
-                  if (e.target.value) {
-                    handleAddTech(e.target.value);
-                    e.target.value = '';
-                  }
-                }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
-              >
-                <option value="">+Add: React</option>
-                <option value="React">React</option>
-                <option value="Next.js">Next.js</option>
-                <option value="Tailwind CSS">Tailwind CSS</option>
-                <option value="TypeScript">TypeScript</option>
-                <option value="Node.js">Node.js</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                </svg>
-              </div>
-            </div>
+             <input
+              type="text"
+              name='techStack'
+              id="techStack"
+              value={formData.techStack}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter tech stack (e.g., React, Node.js)"
+              />
+            
           </div>
-          
-          {/* GitHub URL */}
+
           <div className="mb-4">
             <label htmlFor="githubUrl" className="block text-sm font-medium text-gray-700 mb-1">GitHub URL</label>
             <input
+            name='githubUrl'
               type="url"
               id="githubUrl"
-              value={githubUrl}
-              onChange={(e) => setGithubUrl(e.target.value)}
+              value={formData.githubUrl}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter GitHub URL"
             />
           </div>
           
-          {/* Live Demo URL */}
           <div className="mb-4">
             <label htmlFor="demoUrl" className="block text-sm font-medium text-gray-700 mb-1">Live Demo URL</label>
             <input
+              name='demoUrl'
               type="url"
               id="demoUrl"
-              value={demoUrl}
-              onChange={(e) => setDemoUrl(e.target.value)}
+              value={formData.demoUrl}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter Live Demo URL"
             />
           </div>
           
-          {/* Short Description */}
           <div className="mb-4">
-            <label htmlFor="shortDescription" className="block text-sm font-medium text-gray-700 mb-1">Short Description</label>
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Short Description</label>
             <input
+              name='description'
               type="text"
-              id="shortDescription"
-              value={shortDescription}
-              onChange={(e) => setShortDescription(e.target.value)}
+              id="description"
+              value={formData.description}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter a short description"
             />
           </div>
           
-          {/* Detailed Write-up */}
           <div className="mb-6">
             <label htmlFor="detailedWriteup" className="block text-sm font-medium text-gray-700 mb-1">Detailed Write-up</label>
             <textarea
+              name='detailedWriteup'
               id="detailedWriteup"
-              value={detailedWriteup}
-              onChange={(e) => setDetailedWriteup(e.target.value)}
+              value={formData.detailedWriteup}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[120px]"
               placeholder="Add detailed write-up here..."
             />
           </div>
         </div>
-        
-        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+          className="w-full bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
         >
           Post Project
         </button>
@@ -163,3 +174,5 @@ export default function PostProject() {
     </div>
   );
 }
+
+

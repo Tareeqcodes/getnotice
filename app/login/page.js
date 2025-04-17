@@ -31,7 +31,7 @@ export default function LoginForm() {
           />
           <button
             type="submit"
-            className="w-full rounded-md bg-indigo-600 p-3 text-white hover:bg-indigo-700"
+            className="w-full rounded-md cursor-pointer bg-indigo-600 p-3 text-white hover:bg-indigo-700"
           >
             Send Magic Link
           </button>

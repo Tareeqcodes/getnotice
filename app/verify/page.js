@@ -1,29 +1,36 @@
 'use client';
+
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { account } from '../../config/appwrite';
+import { useAuth } from '@/context/authContext';
 
 export default function Confirm() {
   const router = useRouter();
+  const { refreshUser } = useAuth(); 
 
   useEffect(() => {
     const verifySession = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userId = urlParams.get('userId');
+      const secret = urlParams.get('secret');
+
+      console.log('Params:', { userId, secret });
+
+      if (!userId || !secret) {
+        console.warn('Missing credentials from URL');
+        router.push('/login');
+        return;
+      }
+
       try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const userId = urlParams.get('userId');
-        const secret = urlParams.get('secret');
 
-        console.log({ userId, secret }); // Debug check
-
-        if (userId && secret) {
-          await account.createSession(userId, secret);
-          router.push('/dashboard');
-        } else {
-          console.warn('Missing userId or secret');
-          router.push('/login');
-        }
+       await account.createSession(userId, secret); 
+        await refreshUser();
+        console.log('Session created:', session);
+        router.push('/dashboard');
       } catch (error) {
-        console.error('Verification error:', error);
+        console.error('Verification failed:', error.message);
         router.push('/login');
       }
     };
@@ -31,5 +38,5 @@ export default function Confirm() {
     verifySession();
   }, [router]);
 
-  return <div>Verifying your session...</div>;
+  return <div className='h-screen'>Verifying session, please wait...</div>;
 }
