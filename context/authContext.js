@@ -15,10 +15,16 @@ export const AuthProvider = ({ children }) => {
 
   const checkSession = async () => {
     try {
-      const user = await account.get();
-      setUser(user);
+      const session = await account.getSession('current');
+      if (session) {
+        const user = await account.get();
+        setUser(user);
+        return;
+      } else {
+        setUser(null);
+      }
     } catch (error) {
-      setUser(null);
+        setUser(null);
     } finally {
       setLoading(false);
     }
@@ -45,7 +51,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, refreshUser: checkSession }}>
+    <AuthContext.Provider value={{ user, loading, login, logout, checkSession }}>
       {children}
     </AuthContext.Provider>
   );

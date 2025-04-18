@@ -3,11 +3,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { account } from '../../config/appwrite';
-import { useAuth } from '@/context/authContext';
+import  { useAuth } from '../../context/authContext';
 
 export default function Confirm() {
   const router = useRouter();
-  const { refreshUser } = useAuth(); 
+  const { checkSession } = useAuth();
 
   useEffect(() => {
     const verifySession = async () => {
@@ -24,10 +24,14 @@ export default function Confirm() {
       }
 
       try {
+       const session = await account.createSession(
+        userId, 
+        secret
+      );    
+      console.log('Session created:', session);
 
-       await account.createSession(userId, secret); 
-        await refreshUser();
-        console.log('Session created:', session);
+       await  checkSession(); 
+
         router.push('/dashboard');
       } catch (error) {
         console.error('Verification failed:', error.message);
@@ -38,5 +42,5 @@ export default function Confirm() {
     verifySession();
   }, [router]);
 
-  return <div className='h-screen'>Verifying session, please wait...</div>;
+  return <div className='h-screen items-center justify-center'>Verifying session, please wait...</div>;
 }
