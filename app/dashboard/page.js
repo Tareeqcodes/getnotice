@@ -19,7 +19,7 @@ export default function Dashboard() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
       <h1>Welcome, {user.email}</h1>
-      <button onClick={() => logout()}>Logout</button>
+      <button className='text-2xl cursor-pointer bg-gray-300 p-3' onClick={() => logout()}>Logout</button>
     </div>
   );
 }
