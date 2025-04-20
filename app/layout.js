@@ -25,9 +25,11 @@ export default function RootLayout({ children }) {
        className={poppins.className}
       >
         <AuthProvider>
+          <main>
         <Navbar />
         {children}
         <Footer />
+          </main>
         </AuthProvider>
       </body>
     </html>

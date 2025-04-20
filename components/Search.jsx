@@ -3,7 +3,7 @@ import { FunnelIcon } from '@heroicons/react/24/outline';
 
 export default function Search({ search, setSearch, onFilterClick }) {
   return (
-    <div className="flex items-center justify-between rounded-xl border border-gray-300 bg-white p-2 mt-10 mx-32 shadow-sm">
+    <div className="flex items-center justify-between rounded-xl border border-gray-300 bg-white p-2 mt-10 shadow-sm">
       <input
         type="text"
         value={search}
@@ -16,7 +16,7 @@ export default function Search({ search, setSearch, onFilterClick }) {
         className="ml-4 flex items-center gap-1 rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100"
       >
         <FunnelIcon className="h-5 w-5 text-gray-500" />
-        Filter by
+        Filter
       </button>
     </div>
   );

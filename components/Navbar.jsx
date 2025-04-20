@@ -4,8 +4,10 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { SparklesIcon } from "@heroicons/react/24/solid";
+import { useAuth } from "@/context/authContext";
 
 export default function Navbar() {
+   const {user} = useAuth()
   return (
     
         <nav className="bg-gray-950 text-white px-6 py-4 flex justify-between items-center">
@@ -23,25 +25,28 @@ export default function Navbar() {
           </Link>
           
         </motion.div>
-        <div className="flex space-x-28 justify-between">
-        <Link
-            className="hover:text-indigo-500 text-base transition"
-
-          href="/home" >
-            Home
-          </Link >
-           <Link
-            className="hover:text-indigo-500 text-base transition"
-            href="/feed">
-            Feeds
-           </Link>
-           <Link
-            className="hover:text-indigo-500 text-base transition"
-
-          href="/post" >
-            Post 
-          </Link >
-        </div>
+           {user && (
+             <div className="flex space-x-28 justify-between">
+             <Link
+                 className="hover:text-indigo-500 text-base transition"
+     
+               href="/dashboard" >
+                 Home
+               </Link >
+                <Link
+                 className="hover:text-indigo-500 text-base transition"
+                 href="/feed">
+                 Feeds
+                </Link>
+                <Link
+                 className="hover:text-indigo-500 text-base transition"
+     
+               href="/dashboard/post" >
+                 Post 
+               </Link >
+             </div>
+           )}
+        
         <motion.div 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
