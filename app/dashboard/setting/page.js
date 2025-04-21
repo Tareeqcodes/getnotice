@@ -1,14 +1,35 @@
-import React from 'react'
+
+'use client'
+import React, { useState } from 'react'
+import Account from '@/components/Account'
+import PersonalInfo from '@/components/PersonalInfo'
 
 export default function page() {
+   const [ activeTab, setActiveTab] = useState('personal')
   return (
-    <div className='flex space-x-5 justify-center mt-5'>
-          <h1>
-            Personal information
-          </h1>
-           <h2>
-             Account
-           </h2>
+    <div className=' pl-36 space-x-5  mt-5'>
+           <div className="flex space-x-4 mb-6">
+        <button
+          onClick={() => setActiveTab('personal')}
+          className={`px-4 py-2 rounded-md cursor-pointer ${
+            activeTab === 'personal' ? 'bg-purple-100 text-purple-700 font-semibold' : 'bg-gray-100'
+          }`}
+        >
+          Personal Information
+        </button>
+        <button
+          onClick={() => setActiveTab('account')}
+          className={`px-4 py-2 rounded-md cursor-pointer ${
+            activeTab === 'account' ? 'bg-purple-100 text-purple-700 font-semibold' : 'bg-gray-100'
+          }`}
+        >
+          Account
+        </button>
+      </div>
+      <div className="bg-white shadow-md rounded-lg p-6">
+        {activeTab === 'personal' && <PersonalInfo />}
+        {activeTab === 'account' && <Account />}
+        </div>
     </div>
   )
 }
