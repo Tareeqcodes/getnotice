@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Account from '@/components/Account'
 import PersonalInfo from '@/components/PersonalInfo'
 
-export default function page() {
+export default function Page() {
    const [ activeTab, setActiveTab] = useState('personal')
   return (
     <div className=' pl-36 space-x-5  mt-5'>

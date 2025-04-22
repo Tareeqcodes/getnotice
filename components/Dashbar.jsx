@@ -4,9 +4,12 @@ import Link from "next/link";
 import { FiHome, FiSettings } from "react-icons/fi";
 import { IoIosLogOut } from "react-icons/io";
 import { FaPlus } from "react-icons/fa";
+import { useAuth } from "@/context/authContext";
 
 
 const Dashbar = () => {
+  const { logout } = useAuth();
+  
   return (
     <aside className="sm:hidden w-20 h-screen bg-white border-r border-gray-200 p-4 md:flex md:flex-col items-center justify-between md:items-start">  
       <nav className="space-y-9 mt-10 w-full">
@@ -37,7 +40,7 @@ const Dashbar = () => {
         </Link> 
       </nav>
         <div className="mb-10 items-center">
-            <button className="flex flex-col items-center gap-1 text-gray-700 cursor-pointer hover:text-purple-600">
+            <button onClick={logout} className="flex flex-col items-center gap-1 text-gray-700 cursor-pointer hover:text-purple-600">
                 <IoIosLogOut className="text-xl" />
                 <span className="hidden text-xs md:inline">Logout</span>
             </button>

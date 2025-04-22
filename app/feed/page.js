@@ -8,11 +8,9 @@ export default function page() {
       <div className='flex justify-center mt-8'>
         <Search />
       </div>
-      <div className='mt-8'>
-        <h2 className='text-2xl font-semibold text-gray-800'>Latest Posts</h2>
-       </div>
-      
+      <div className='justify-center mt-8 '>
         <Feeds />
+      </div>
     </div>
   )
 }

@@ -4,11 +4,10 @@ import { useState } from 'react';
 import { databases, ID } from '@/config/appwrite';
 import { toast } from 'react-toastify';
 import { FiGithub, FiGlobe, FiTag, FiFileText, FiCode, FiSend } from 'react-icons/fi';
-
-// import { useAuth } from '@/context/authContext';
+import { useAuth } from '@/context/authContext';
 
 export default function Page() {
-  // const { user } = useAuth();
+   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -18,6 +17,7 @@ export default function Page() {
     demoUrl: '',
     detail: '',
     techStack: '',
+    user_id: user.$id,
   });
   const reset = () => {
     setFormData({
@@ -50,6 +50,7 @@ export default function Page() {
       demoUrl: formData.demoUrl,
       detail: formData.detail,
       techStack: formData.techStack,
+      user_id: user.$id,
     }
     
      try {
@@ -68,14 +69,6 @@ export default function Page() {
      } finally {
        setLoading(false);
      }
-     console.log({
-      title: formData.title,
-      description: formData.description,
-      githubUrl: formData.githubUrl,
-      demoUrl: formData.demoUrl,
-      detail: formData.detail,
-      techStack: formData.techStack,
-    });
     
   };
 

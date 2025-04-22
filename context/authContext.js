@@ -1,5 +1,6 @@
 'use client';
 import { createContext, useContext, useState, useEffect } from 'react';
+import { redirect } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { account, ID } from '../config/appwrite';
 
@@ -8,6 +9,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+   
 
   useEffect(() => {
     checkSession();
@@ -48,6 +50,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     await account.deleteSession('current');
     setUser(null);
+    redirect('/');
   };
 
   return (
