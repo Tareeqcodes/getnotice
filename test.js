@@ -1,105 +1,167 @@
+'use client'
+import { useEffect, useState } from 'react'
+import { databases } from '@/config/appwrite'
+import PostCard from './PostCard'
+
+export default function Feeds() {
+    const [posts, setPosts] = useState([])
+    const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [postRes, userRes] = await Promise.all([
+                    databases.listDocuments(
+                        process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
+                        process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID
+                    ),
+                    databases.listDocuments(
+                        process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
+                        process.env.NEXT_PUBLIC_APPWRITE_USERS_COLLECTION_ID
+                    )
+                ])
+
+                setPosts(postRes.documents)
+                setUsers(userRes.documents)
+            } catch (error) {
+                setError(error)
+            } finally {
+                setLoading(false)
+            }
+        }
+        fetchData()
+    }, [])
+
+    if (loading) return <div>Loading...</div>
+    if (error) return <div>Error: {error.message}</div>
+    if (!posts.length) return <div>No posts found</div>
+
+    const mapUsers = users.map(user => {
+        const userProjects = posts.filter(post => post.user_id === user.user_id)
+        return { user, projects: userProjects }
+    }).filter(u => u.projects.length > 0)
+
+    return (
+        <div className="grid gap-3 mx-16 grid-cols-1 md:grid-cols-3">
+            {mapUsers.map(({ user, projects }) => (
+             <PostCard key={user.user_id} user={user} projects={projects} />
+            ))}
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
 'use client';
-
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiThumbsUp, FiGithub, FiExternalLink, FiUser, FiArrowUpRight } from 'react-icons/fi';
+import { FiThumbsUp, FiGithub, FiExternalLink } from 'react-icons/fi';
+import { Switch } from "@headlessui/react";
 
-export default function PostCard({ post, user }) {
+export default function PostCard({ user, projects }) {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-800/20 border border-gray-100 dark:border-gray-700 p-6 mb-6 max-w-3xl mx-auto hover:shadow-xl transition-all duration-300"
+      className="bg-white rounded-2xl shadow-md border border-gray-100 p-6 mb-2 hover:shadow-xl transition-shadow"
     >
-      {/* Gradient Background Effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-gray-900/50 dark:to-gray-900/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      
-      <div className="relative z-10">
-        {/* User Header Section */}
-        <div className="flex items-center justify-between gap-4 mb-6">
-          <div className="flex items-center gap-4">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-md"
-            >
-              {user?.name?.charAt(0).toUpperCase() || 'U'}
-            </motion.div>
-            <div>
-              <h4 className="font-bold text-gray-800 dark:text-gray-100">
-                {user?.name || 'Unknown Dev'}
-              </h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                <FiUser className="inline" /> Developer
-              </p>
-            </div>
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+            {user?.name?.charAt(0).toUpperCase() || 'U'}
           </div>
-          
-          {/* Tech Stack Chips */}
-          <div className="flex flex-wrap gap-2">
-            {post.techStack?.split(',').map((tech, index) => (
-              <motion.span
-                key={index}
-                whileHover={{ scale: 1.05 }}
-                className="text-xs bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-blue-800 dark:text-blue-300 px-3 py-1.5 rounded-full font-medium shadow-sm"
-              >
-                #{tech.trim()}
-              </motion.span>
-            ))}
+          <div className="items-center justify-center pt-1 text-justify">
+            <h4 className="font-semibold text-gray-800">{user?.name || 'Unknown Dev'}</h4>
+            <p className="text-xs text-gray-500">Developer</p>
           </div>
         </div>
-
-        {/* Content Section */}
-        <div className="mb-6">
-          <h3 className="text-2xl font-extrabold dark:text-gray-100 mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            {post.title}
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-3">
-            {post.description}
-          </p>
-        </div>
-
-        {/* Footer Actions */}
-        <div className="flex items-center justify-between border-t border-gray-100 dark:border-gray-700 pt-4">
-          <div className="flex items-center gap-4">
-            {post.githubUrl && (
-              <motion.a
-                whileHover={{ y: -2 }}
-                href={post.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
-              >
-                <FiGithub className="text-lg" />
-                <span className="text-sm font-medium">Source Code</span>
-                <FiArrowUpRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
-              </motion.a>
-            )}
-            {post.demoUrl && (
-              <motion.a
-                whileHover={{ y: -2 }}
-                href={post.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors"
-              >
-                <FiExternalLink className="text-lg" />
-                <span className="text-sm font-medium">Live Demo</span>
-                <FiArrowUpRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
-              </motion.a>
-            )}
-          </div>
-
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white text-sm font-semibold rounded-lg transition-all shadow-md hover:shadow-lg"
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-600">Available</span>
+          <Switch
+            checked={user.openToWork}
+            disabled
+            className={`${
+              user.openToWork ? "bg-green-500" : "bg-gray-300"
+            } relative inline-flex h-5 w-10 items-center rounded-full`}
           >
-            <FiThumbsUp className="text-lg" />
-            <span>Endorse</span>
-            <span className="ml-1 bg-white/20 px-2 py-1 rounded text-xs">42</span>
-          </motion.button>
+            <span
+              className={`${
+                user.openToWork ? "translate-x-5" : "translate-x-1"
+              } inline-block h-3 w-3 transform bg-white rounded-full transition`}
+            />
+          </Switch>
         </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2 pt-3 mb-4">
+        {user?.skills?.split(',').map((skill, idx) => (
+          <span key={idx} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
+            #{skill.trim()}
+          </span>
+        ))}
+      </div>
+         <div className="flex items-center justify-between">
+           <button className="font-medium cursor-pointer text-green-600 hover:underline text-sm">
+             Interested/Hire
+           </button>
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="text-sm text-purple-600 cursor-pointer hover:underline"
+      >
+        {expanded ? 'Hide Projects' : 'Show Projects'}
+      </button>
+         </div>
+      {expanded && (
+        <div className="space-y-4">
+          {projects.map((project) => (
+            <motion.div
+              key={project.$id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="border p-4 rounded-lg bg-gray-50"
+            >
+              <h3 className="text-lg font-semibold text-gray-800">{project.title}</h3>
+              <p className="text-sm text-gray-700 mb-2">{project.description}</p>
+              <div className="flex gap-4">
+                {project.githubUrl && (
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black flex items-center gap-1">
+                    <FiGithub /> GitHub
+                  </a>
+                )}
+                {project.demoUrl && (
+                  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black flex items-center gap-1">
+                    <FiExternalLink /> Demo
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      <div className="border-t border-gray-100 pt-4 mt-4 flex justify-end">
+        <motion.button
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center cursor-pointer gap-1 px-3 py-1 bg-purple-100 hover:bg-purple-200 text-purple-800 text-sm font-semibold rounded-lg transition"
+        >
+          <FiThumbsUp /> Endorse
+        </motion.button>
       </div>
     </motion.div>
   );

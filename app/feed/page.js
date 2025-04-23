@@ -8,7 +8,8 @@ export default function page() {
       <div className='flex justify-center mt-8'>
         <Search />
       </div>
-      <div className='justify-center mt-8 '>
+      <div className='mt-10'>
+
         <Feeds />
       </div>
     </div>

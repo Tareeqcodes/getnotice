@@ -1,13 +1,16 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { databases, Query } from '@/config/appwrite'
+import { databases } from '@/config/appwrite'
 import PostCard from './PostCard'
+import ProjectModal from '@/components/ProjectModal'
 
 export default function Feeds() {
     const [posts, setPosts] = useState([])
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [selectedProjects, setSelectedProjects] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,14 +41,35 @@ export default function Feeds() {
     if (error) return <div>Error: {error.message}</div>
     if (!posts.length) return <div>No posts found</div>
 
+    const mapUsers = users.map(user => {
+        const userProjects = posts.filter(post => post.user_id === user.user_id)
+        return { user, projects: userProjects }
+    }).filter(u => u.projects.length > 0)
+
+    const openModal = (user, projects) => {
+        setSelectedUser(user);
+        setSelectedProjects(projects);
+      };
+
     return (
-        <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-            {
-                posts.map(post => {
-                    const user = users.find(u => u.user_id === post.user_id)
-                    return <PostCard key={post.$id} post={post} user={user} />
-                })
-            }
-        </div>
+        <>
+      <div className="grid gap-3 mx-20 grid-cols-1 md:grid-cols-3">
+        {mapUsers.map(({ user, projects }) => (
+          <PostCard
+            key={user.user_id}
+            user={user}
+            onShowProjects={() => openModal(user, projects)}
+          />
+        ))}
+      </div>
+
+      {selectedUser && (
+        <ProjectModal
+          user={selectedUser}
+          projects={selectedProjects}
+          onClose={() => setSelectedUser(null)}
+        />
+      )}
+    </>
     )
 }
