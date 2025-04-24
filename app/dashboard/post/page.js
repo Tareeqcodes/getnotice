@@ -12,7 +12,6 @@ export default function Page() {
 
   const [formData, setFormData] = useState({
     title: '',
-    description: '',
     githubUrl: '',
     demoUrl: '',
     detail: '',
@@ -22,7 +21,6 @@ export default function Page() {
   const reset = () => {
     setFormData({
       title: '',
-      description: '',
       githubUrl: '',
       demoUrl: '',
       detail: '',
@@ -45,7 +43,6 @@ export default function Page() {
 
     const documentData = {
       title: formData.title,
-      description: formData.description,
       githubUrl: formData.githubUrl,
       demoUrl: formData.demoUrl,
       detail: formData.detail,
@@ -83,7 +80,7 @@ export default function Page() {
 
       <form onSubmit={handleSubmit} className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Title Field */}
+
           <div className="col-span-2">
             <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
               <FiTag className="mr-2 text-blue-600" />
@@ -102,7 +99,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Tech Stack */}
           <div className="col-span-2">
             <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
               <FiCode className="mr-2 text-blue-600" />
@@ -149,20 +145,6 @@ export default function Page() {
             />
           </div>
 
-          <div className="col-span-2">
-            <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
-              <FiFileText className="mr-2 text-blue-600" />
-              Project Summary
-            </label>
-            <input
-              name="description"
-              type="text"
-              value={formData.description}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border-0 ring-2 ring-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all duration-200 placeholder-gray-400"
-              placeholder="A brief elevator pitch of your project"
-            />
-          </div>
 
           <div className="col-span-2">
             <label className=" text-sm font-medium text-gray-700 mb-2 flex items-center">
@@ -174,7 +156,7 @@ export default function Page() {
               value={formData.detail}
               onChange={handleChange}
               className="w-full px-4 py-3 border-0 ring-2 ring-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 transition-all duration-200 placeholder-gray-400 min-h-[150px]"
-              placeholder="Tell us about your project's features, challenges, and lessons learned..."
+              placeholder="A brief elevator pitch of your project..."
             />
           </div>
         </div>

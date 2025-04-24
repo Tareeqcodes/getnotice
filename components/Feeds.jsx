@@ -53,7 +53,7 @@ export default function Feeds() {
 
     return (
         <>
-      <div className="grid gap-3 mx-20 grid-cols-1 md:grid-cols-3">
+      <div className="grid gap-3 mx-3 md:mx-20 grid-cols-1 md:grid-cols-3">
         {mapUsers.map(({ user, projects }) => (
           <PostCard
             key={user.user_id}

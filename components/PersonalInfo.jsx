@@ -144,6 +144,7 @@ export default function PersonalInfo() {
             placeholder="E.g. React, Tailwind, Firebase"
             className="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-purple-500"
           />
+          <p className="text-xs pt-1">Maximum 3 skills:</p>
         </div>
 
         <div>

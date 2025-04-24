@@ -13,7 +13,7 @@ export default function PostCard({ user, onShowProjects }) {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="bg-white rounded-2xl shadow-md border border-gray-100 p-6 mb-2 hover:shadow-xl transition-shadow"
+      className="bg-white rounded-2xl shadow-md border border-gray-100 p-3 md:p-6 mb-2 hover:shadow-xl transition-shadow"
     >
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-3">
@@ -43,7 +43,7 @@ export default function PostCard({ user, onShowProjects }) {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2 pt-3 mb-4">
+      <div className="flex flex-wrap gap-2 py-3 mb-4">
         {user?.skills?.split(',').map((skill, idx) => (
           <span key={idx} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">
             #{skill.trim()}
