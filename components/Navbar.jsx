@@ -10,7 +10,7 @@ export default function Navbar() {
    const {user} = useAuth()
   return (
     
-        <nav className="bg-gray-950 text-white px-6 py-4 hidden md:flex justify-between items-center">
+        <nav className="bg-gray-950 text-white px-6 py-4 flex justify-between items-center">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -40,6 +40,7 @@ export default function Navbar() {
                </Link >
              </div>
            )}
+
            {user ? (
               <Link
                 href="/dashboard/setting"
@@ -64,8 +65,6 @@ export default function Navbar() {
             </motion.div>
            )
            }
-        
-        
       </nav>
   )
 }

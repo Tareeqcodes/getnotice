@@ -3,7 +3,7 @@ import Main from "../components/Main";
 
 export default function Home() {
   return (
-    <div className="min-h-screen mb-10 md:mb-0 justify-center text-center">
+    <div className="min-h-screen pb-10 md:mb-0 justify-center text-center">
       <Main />
     </div>
   );
