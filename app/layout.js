@@ -45,7 +45,7 @@ export const metadata = {
     siteName: "Devs Realm",
     images: [
       {
-        url: "/images/3.png",
+        url: "/images/realm.png",
         width: 1200,
         height: 630,
         alt: "Screenshot of a Devs Realm developer profile",
@@ -58,7 +58,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Devs Realm",
     description: "Share your dev projects and get hired. Join the GetNotice community.",
-    images: ["/images/3.png"],
+    images: ["/images/realm.png"],
   },
   robots: {
     index: true,
