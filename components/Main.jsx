@@ -11,13 +11,13 @@ import {
 
 export default function Main() {
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
-      <div className="container mx-auto px-6 py-20 text-center">
+    <div className="min-h-screen bg-gray-950 mb-10 md:mb-0 text-white">
+      <div className="container mx-auto px-6 py-20 text-justify md:text-center">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-6xl font-bold text-white mb-6"
+          className="text-4xl md:text-6xl font-bold text-white"
         >
           Get Noticed. <span className="text-indigo-500">Get Hired.</span>
         </motion.h1>
@@ -73,7 +73,7 @@ export default function Main() {
               key={index}
               whileHover={{ y: -5, scale: 1.03 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="bg-gray-900 p-6 rounded-xl shadow-md hover:shadow-lg transition border border-gray-800"
+              className="bg-gray-900 p-6 rounded-xl text-justify shadow-md hover:shadow-lg transition border border-gray-800"
             >
               <div className="mb-4">{item.icon}</div>
               <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
