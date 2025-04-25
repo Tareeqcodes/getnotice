@@ -15,7 +15,7 @@ const poppins = Poppins({
 
 
 export const metadata = {
-  metadataBase: new URL('https://getnotice.vercel.app/'),
+  metadataBase: new URL('https://devsrealm.vercel.app/'),
   title: {
     default: "Devs Realm | Showcase Your Developer Journey",
     template: "%s | Devs Realm",
@@ -41,7 +41,7 @@ export const metadata = {
   openGraph: {
     title: "Devs Realm - Let the World See Your Code",
     description: "Showcase your developer journey and get noticed by hiring managers and the community.",
-    url: "https://getnotice.vercel.app/",
+    url: "https://devsrealm.vercel.app/",
     siteName: "GetNotice",
     images: [
       {
@@ -81,9 +81,9 @@ export const metadata = {
   },
   manifest: "/site.webmanifest",
   alternates: {
-    canonical: "https://getnotice.vercel.app/",
+    canonical: "https://devsrealm.vercel.app/",
     languages: {
-      en: "https://getnotice.vercel.app/en",
+      en: "https://devsrealm.vercel.app/en",
     },
   },
   verification: {
