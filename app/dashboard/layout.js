@@ -1,7 +1,9 @@
+"use client"
+
 import Dashbar from "@/components/dashbar"
 
 
-export default function dashBoardLayout({children}) {
+export default function DashBoardLayout({children}) {
   return (
     <div className='flex h-screen'>
        <Dashbar />
