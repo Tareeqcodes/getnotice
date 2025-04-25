@@ -10,7 +10,7 @@ export default function Navbar() {
    const {user} = useAuth()
   return (
     
-        <nav className="bg-gray-950 text-white px-6 py-4 flex justify-between items-center">
+        <nav className="bg-gray-950 text-white px-6 py-4 hidden md:flex justify-between items-center">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -27,38 +27,45 @@ export default function Navbar() {
         </motion.div>
            {user && (
              <div className="flex space-x-28 justify-between">
-             <Link
-                 className="hover:text-indigo-500 text-base transition"
-     
-               href="/dashboard" >
-                 Home
-               </Link >
                 <Link
                  className="hover:text-indigo-500 text-base transition"
                  href="/feed">
-                 Feeds
+                 Devs Realm
                 </Link>
                 <Link
                  className="hover:text-indigo-500 text-base transition"
      
-               href="/dashboard/post" >
+               href="/post" >
                  Post 
                </Link >
              </div>
            )}
-        
-        <motion.div 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-         >
-          <Link
-            href="/login"
-            className="px-4 py-2 font-semibold bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition"
-          >
-            Login
-          </Link>
+           {user ? (
+              <Link
+                href="/dashboard/setting"
+                className="hover:text-indigo-500 text-base pr-4 transition"
+               >
+                
+               Dashboard
+              </Link>
+           ) : (
 
-          </motion.div>
+            <motion.div 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+           >
+            <Link
+              href="/login"
+              className="px-4 py-2 font-semibold bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition"
+            >
+              Login
+            </Link>
+  
+            </motion.div>
+           )
+           }
+        
+        
       </nav>
   )
 }

@@ -18,22 +18,11 @@ const Dashbar = () => {
           <span className="hidden text-xs md:inline">Home</span>
         </Link>
         
-        <Link href="/dashboard/post" className="flex  flex-col items-center gap-3 text-gray-700 hover:text-purple-600">
+        <Link href="/post" className="flex  flex-col items-center gap-3 text-gray-700 hover:text-purple-600">
           <FaPlus className="text-xl" />
           <span className="hidden text-xs md:inline">Post</span>
         </Link> 
-        <Link href="/dashboard/post" className="flex  flex-col items-center gap-3 text-gray-700 hover:text-purple-600">
-          <FaPlus className="text-xl" />
-          <span className="hidden text-xs md:inline">Post</span>
-        </Link> 
-        <Link href="/dashboard/post" className="flex  flex-col items-center gap-3 text-gray-700 hover:text-purple-600">
-          <FaPlus className="text-xl" />
-          <span className="hidden text-xs md:inline">Post</span>
-        </Link> 
-        <Link href="/dashboard/setting" className="flex  flex-col items-center gap-3 text-gray-700 hover:text-purple-600">
-          <FiSettings className="text-xl" />
-          <span className="hidden text-xs md:inline">Setting</span>
-        </Link> 
+
         <Link href="/dashboard/setting" className="flex  flex-col items-center gap-3 text-gray-700 hover:text-purple-600">
           <FiSettings className="text-xl" />
           <span className="hidden text-xs md:inline">Setting</span>

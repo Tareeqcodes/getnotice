@@ -32,7 +32,7 @@ export default function Confirm() {
 
        await  checkSession(); 
 
-        router.push('/dashboard');
+        router.push('/dashboard/setting');
       } catch (error) {
         console.error('Verification failed:', error.message);
         router.push('/login');

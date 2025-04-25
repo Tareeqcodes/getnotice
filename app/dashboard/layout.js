@@ -5,7 +5,7 @@ export default function dashBoardLayout({children}) {
   return (
     <div className='flex h-screen'>
        <Dashbar />
-       <main className="flex-1 p-10 overflow-y-auto">
+       <main className="flex-1 p-10">
             {children}
        </main>
     </div>

@@ -70,7 +70,7 @@ export default function Page() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl shadow-xl">
+    <div className="max-w-3xl mx-auto p-8 bg-gradient-to-br overflow-y-clip my-10 from-gray-50 to-blue-50 rounded-2xl shadow-xl">
       <div className="mb-8 text-center">
         <h1 className="text-4xl font-extrabold text-gray-900 mb-2 bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
           Share Your Project

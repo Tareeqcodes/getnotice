@@ -89,9 +89,9 @@ export default function PersonalInfo() {
 
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md">
+    <div className="bg-white overflow-y-scroll mb-10 p-6 rounded-xl shadow-lg">
       <div className="flex items-center space-x-4 mb-8">
-        <div className="w-16 h-16 rounded-full bg-purple-600 flex items-center justify-center text-white text-2xl font-bold">
+        <div className="w-16 h-16 rounded-full bg-green-600 flex items-center justify-center text-white text-2xl font-bold">
           {user.email?.charAt(0)?.toUpperCase() || "U"}
         </div>
         <div className="pt-4">
