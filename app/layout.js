@@ -87,9 +87,11 @@ export const metadata = {
     },
   },
   verification: {
-    google: "GetNoticeVerificationCodeHere",
+    google: "6GPrJZ7YUXkR3Qt38gEbtqi7dBrrv_bNVv9DUbArgGA",
   },
 };
+
+
 
 export default function RootLayout({ children }) {
   return (

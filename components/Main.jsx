@@ -26,7 +26,7 @@ export default function Main() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg text-gray-300 max-w-2xl mx-auto my-2"
+          className="text-lg text-gray-300 mx-auto my-2"
         >
           Devs Realm is the visibility platform for junior devs to showcase projects,
           build credibility, and attract real opportunities. No more shouting into the void.
