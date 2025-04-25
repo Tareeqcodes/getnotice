@@ -28,12 +28,12 @@ export default function Navbar() {
            {user && (
              <div className="flex space-x-28 justify-between">
                 <Link
-                 className="hover:text-indigo-500 font-semibold text-base transition"
+                 className="hover:text-indigo-500 hidden md:block font-semibold text-base transition"
                  href="/feed">
                  Realm
                 </Link>
                 <Link
-                 className="hover:text-indigo-500 font-semibold text-base transition"
+                 className="hover:text-indigo-500 hidden md:block font-semibold text-base transition"
      
                href="/post" >
                  Post 
@@ -44,7 +44,7 @@ export default function Navbar() {
            {user ? (
               <Link
                 href="/dashboard/setting"
-                className="hover:text-indigo-500 font-semibold text-base pr-4 transition"
+                className="hover:text-indigo-500 hidden md:block font-semibold text-base pr-4 transition"
                >
                 
                Dashboard
