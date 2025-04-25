@@ -42,10 +42,10 @@ export const metadata = {
     title: "Devs Realm - Let the World See Your Code",
     description: "Showcase your developer journey and get noticed by hiring managers and the community.",
     url: "https://devsrealm.vercel.app/",
-    siteName: "GetNotice",
+    siteName: "Devs Realm",
     images: [
       {
-        url: "/images/2.png",
+        url: "/images/3.png",
         width: 1200,
         height: 630,
         alt: "Screenshot of a Devs Realm developer profile",
