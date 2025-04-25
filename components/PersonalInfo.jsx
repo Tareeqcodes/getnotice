@@ -89,7 +89,7 @@ export default function PersonalInfo() {
 
 
   return (
-    <div className="bg-white overflow-y-scroll mb-10 p-6 rounded-xl shadow-lg">
+    <div className="bg-white overflow-y-scroll p-3 md:p-6 rounded-xl shadow-lg">
       <div className="flex items-center space-x-4 mb-8">
         <div className="w-16 h-16 rounded-full bg-green-600 flex items-center justify-center text-white text-2xl font-bold">
           {user.email?.charAt(0)?.toUpperCase() || "U"}
@@ -99,7 +99,7 @@ export default function PersonalInfo() {
             <FaUserEdit className="text-gray-500" />
             Change avatar
           </button>
-          <p className="text-xs text-gray-400 mt-1">JPG, GIF, or PNG. Max 1MB.</p>
+          <p className="text-xs text-gray-400 mt-1">JPG or PNG. Max 1MB.</p>
         </div>
       </div>
 
@@ -144,7 +144,7 @@ export default function PersonalInfo() {
             placeholder="E.g. React, Tailwind, Firebase"
             className="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-purple-500"
           />
-          <p className="text-xs pt-1">Maximum 3 skills:</p>
+          <p className="text-gray-400 mt-1">Max 3 skills</p>
         </div>
 
         <div>

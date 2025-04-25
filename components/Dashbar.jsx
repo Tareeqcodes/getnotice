@@ -11,14 +11,14 @@ const Dashbar = () => {
   const { logout } = useAuth();
   
   return (
-    <aside className="sm:hidden w-20 h-screen bg-white border-r border-gray-200 p-4 md:flex md:flex-col items-center justify-between md:items-start">  
+    <aside className="hidden w-20 h-screen bg-white border-r border-gray-200 p-4 md:flex md:flex-col items-center justify-between md:items-start">  
       <nav className="space-y-9 mt-10 w-full">
         <Link href="/dashboard" className="flex flex-col items-center gap-3 text-gray-700 hover:text-purple-600">
           <FiHome className="text-xl" />
           <span className="hidden text-xs md:inline">Home</span>
         </Link>
         
-        <Link href="/post" className="flex  flex-col items-center gap-3 text-gray-700 hover:text-purple-600">
+        <Link href="/post" className="flex flex-col items-center gap-3 text-gray-700 hover:text-purple-600">
           <FaPlus className="text-xl" />
           <span className="hidden text-xs md:inline">Post</span>
         </Link> 

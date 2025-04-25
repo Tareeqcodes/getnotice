@@ -21,7 +21,7 @@ export default function Navbar() {
             className="flex items-center space-x-2"
           >
           <SparklesIcon className="h-6 w-6 text-indigo-500" />
-          <span className="text-xl font-bold text-white">GetNotice</span>
+          <span className="text-xl font-bold text-white">Devs Realm</span>
           </Link>
           
         </motion.div>
@@ -30,7 +30,7 @@ export default function Navbar() {
                 <Link
                  className="hover:text-indigo-500 text-base transition"
                  href="/feed">
-                 Devs Realm
+                 Realm
                 </Link>
                 <Link
                  className="hover:text-indigo-500 text-base transition"

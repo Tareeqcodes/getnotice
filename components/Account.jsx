@@ -1,6 +1,11 @@
-import React from 'react'
+"use client"
+
+// import { useAuth } from '@/context/authContext'
+
+
 
 export default function Account() {
+  // const { user } =useAuth();
   return (
     <div>
       <h2 className="text-lg font-semibold mb-4">Account Settings</h2>

@@ -28,7 +28,7 @@ export default function Main() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg text-gray-300 max-w-2xl mx-auto mb-10"
         >
-          GetNotice is the visibility platform for junior devs to showcase projects,
+          Devs Realm is the visibility platform for junior devs to showcase projects,
           build credibility, and attract real opportunities. No more shouting into the void.
         </motion.p>
 

@@ -16,7 +16,6 @@ export default function Page() {
     demoUrl: '',
     detail: '',
     techStack: '',
-    user_id: user.$id,
   });
   const reset = () => {
     setFormData({
@@ -39,6 +38,11 @@ export default function Page() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!user) {
+      toast.error('You must be logged in to post a project');
+      return;
+    }
     setLoading(true);
 
     const documentData = {
@@ -70,12 +74,12 @@ export default function Page() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-gradient-to-br overflow-y-clip my-10 from-gray-50 to-blue-50 rounded-2xl shadow-xl">
+    <div className="max-w-3xl mx-auto p-8 bg-gradient-to-br overflow-y-scroll my-10 from-gray-50 to-blue-50 rounded-2xl shadow-xl">
       <div className="mb-8 text-center">
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-2 bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+        <h1 className="text-xl md:text-4xl font-extrabold text-gray-900 mb-2 bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
           Share Your Project
         </h1>
-        <p className="text-gray-600">Showcase your work to the developer community</p>
+        <p className="text-gray-600 text-sm md:text-xl w-full">Showcase your work to the developer community</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">

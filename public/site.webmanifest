@@ -1,0 +1,31 @@
+
+{
+  "name": "Devs Realm",
+  "short_name": "Realm",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#888",
+  "theme_color": "#FFF",
+  "icons": [
+    {
+      "src": "/images/1.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/1.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/1.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/1.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}
