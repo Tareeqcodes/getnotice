@@ -1,6 +1,6 @@
 "use client"
 
-import Dashbar from "@/components/dashbar"
+import Dashbar from "@/components/Dashbar"
 
 
 export default function DashBoardLayout({children}) {
