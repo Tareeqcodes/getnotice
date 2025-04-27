@@ -10,7 +10,7 @@ import { Switch } from "@headlessui/react"
 const db = process.env.NEXT_PUBLIC_APPWRITE_DB_ID
 const usercll = process.env.NEXT_PUBLIC_APPWRITE_USERS_COLLECTION_ID
 
-export default function PersonalInfo() {
+export default function PersonalInfo() { 
   const { user, loading } = useAuth()
   const [docId, setDocId] = useState(null)
 

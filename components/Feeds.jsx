@@ -1,16 +1,14 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { databases } from '@/config/appwrite'
-import PostCard from './PostCard'
-import ProjectModal from '@/components/ProjectModal'
+import MyProject from './MyProject'
+
 
 export default function Feeds() {
     const [posts, setPosts] = useState([])
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-    const [selectedUser, setSelectedUser] = useState(null);
-    const [selectedProjects, setSelectedProjects] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,30 +44,17 @@ export default function Feeds() {
         return { user, projects: userProjects }
     }).filter(u => u.projects.length > 0)
 
-    const openModal = (user, projects) => {
-        setSelectedUser(user);
-        setSelectedProjects(projects);
-      };
-
     return (
         <>
       <div className="grid gap-3 mx-3 md:mx-20 grid-cols-1 md:grid-cols-3">
         {mapUsers.map(({ user, projects }) => (
-          <PostCard
+          <MyProject
             key={user.user_id}
             user={user}
-            onShowProjects={() => openModal(user, projects)}
+            projects={projects}
           />
         ))}
       </div>
-
-      {selectedUser && (
-        <ProjectModal
-          user={selectedUser}
-          projects={selectedProjects}
-          onClose={() => setSelectedUser(null)}
-        />
-      )}
     </>
     )
 }
