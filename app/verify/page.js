@@ -42,5 +42,6 @@ export default function Confirm() {
     verifySession();
   }, [router]);
 
-  return <div className='h-screen items-center justify-center'>Verifying session, please wait...</div>;
+  return <div className='h-screen p-20 items-center justify-center'>
+    Verifying session, please wait...</div>;
 }

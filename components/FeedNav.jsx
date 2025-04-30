@@ -4,7 +4,7 @@ import { Search } from "lucide-react"
 import WeeklyDev from "./WeeklyDev";
 import Ranking from "./Ranking";
 import Jobs from "./Jobs";
-import MyProject from "./MyProject";
+import MyProjects from "./MyProjects";
 
 export default function FeedNav() {
     const [activeTab, setActiveTab] = useState('discover');
@@ -49,7 +49,7 @@ export default function FeedNav() {
         {activeTab === 'discover' && <WeeklyDev />}
         {activeTab === 'rankings' && <Ranking />}
         {activeTab === 'jobs' && <Jobs />}
-        {activeTab === 'project' && <MyProject />}
+        {activeTab === 'project' && <MyProjects />}
       </div>
       </div>
   )

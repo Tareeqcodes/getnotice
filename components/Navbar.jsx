@@ -49,7 +49,7 @@ export default function Navbar() {
                 <Link
                  className="hover:text-indigo-500 hidden md:block font-semibold text-xs transition"
      
-               href="/post" >
+               href="/" >
                  Post 
                </Link >
              </div>

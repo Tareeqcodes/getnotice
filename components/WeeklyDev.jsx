@@ -1,10 +1,10 @@
+"use client"
 import { Award,  GitBranch, Heart, TrendingUp, MessageSquare, Share2, Bookmark, Zap } from "lucide-react"
 
 export default function WeeklyDev() {
   return (
     <div>
         <div className="p-4">
-            {/* Featured Developer Highlight */}
             <div className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg shadow mb-6">
               <div className="p-4">
                 <div className="flex items-center mb-3">
@@ -16,7 +16,7 @@ export default function WeeklyDev() {
                   <div>
                     <h3 className="font-bold text-lg">Maya Patel</h3>
                     <p className="text-sm opacity-90">Full Stack Developer</p>
-                    <div className="flex gap-2 mt-1">
+                    <div className="flex text-black gap-2 mt-1">
                       <span className="text-xs bg-white bg-opacity-20 px-2 py-1 rounded-full">React</span>
                       <span className="text-xs bg-white bg-opacity-20 px-2 py-1 rounded-full">Node.js</span>
                       <span className="text-xs bg-white bg-opacity-20 px-2 py-1 rounded-full">TypeScript</span>

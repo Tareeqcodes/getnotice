@@ -4,7 +4,6 @@ import { useState, useRef } from 'react';
 import { databases, ID, storage } from '@/config/appwrite';
 import { toast } from 'react-toastify';
 import { FiGithub, FiGlobe, FiTag, FiFileText, FiCode, FiImage, FiX } from 'react-icons/fi';
-
 import { useAuth } from '@/context/authContext';
 
 
@@ -117,7 +116,6 @@ export default function AddProject({ onProjectAdded }) {
       reset();
       if (onProjectAdded) onProjectAdded();
     } catch (error) {
-        alert('Error publishing project')
       toast.error('Error publishing project: ' + error.message);
     } finally {
       setLoading(false);

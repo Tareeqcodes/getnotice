@@ -1,6 +1,9 @@
+'use client'
 import { Users, Code } from "lucide-react"
 
+
 export default function Jobs() {
+
   return (
     <div>
         <div className="p-4">
