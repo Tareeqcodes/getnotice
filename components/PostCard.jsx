@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { FiThumbsUp } from 'react-icons/fi';
 import { Switch } from "@headlessui/react";
 
-export default function PostCard({ user, onShowProjects }) {
+export default function PostCard({ user }) {
   
 
   return (
@@ -22,7 +22,7 @@ export default function PostCard({ user, onShowProjects }) {
           </div>
           <div className="items-center justify-center pt-1 text-justify">
             <h4 className="font-semibold text-gray-800">{user?.name || 'Unknown Dev'}</h4>
-            <p className="text-xs text-gray-500">Developer</p>
+            <p className="text-xs text-gray-500">{user.title}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -59,15 +59,12 @@ export default function PostCard({ user, onShowProjects }) {
 </a>
 
       <button
-        onClick={onShowProjects}
-        
         className="text-sm text-purple-600 cursor-pointer hover:underline"
       >
        Best Projects
       </button>
          </div>
       
-
       <div className="border-t border-gray-100 pt-4 mt-4 flex justify-end">
         <motion.button
           whileTap={{ scale: 0.95 }}

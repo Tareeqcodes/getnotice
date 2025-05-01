@@ -9,7 +9,7 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/24/solid";
 
-export default function Main() {
+export default function Main({post}) {
   return (
     <div className="min-h-screen bg-gray-950 mb-10 md:mb-0 text-white">
       <div className="container mx-auto px-6 py-10 text-justify md:text-center">
@@ -19,7 +19,7 @@ export default function Main() {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-6xl font-bold text-white"
         >
-          Get Noticed. <span className="text-indigo-500">Get Hired.</span>
+         {post.title} Get Noticed. <span className="text-indigo-500">Get Hired.</span>
         </motion.h1>
 
         <motion.p

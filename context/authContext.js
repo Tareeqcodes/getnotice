@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { account, ID } from '../config/appwrite';
+import Spinner from '@/components/Spinner';
 
 const AuthContext = createContext();
 
@@ -55,7 +56,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, loading, login, logout, checkSession }}>
-      {children}
+      {loading ? <Spinner /> : children}
     </AuthContext.Provider>
   );
 };

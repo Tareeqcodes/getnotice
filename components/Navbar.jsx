@@ -46,12 +46,6 @@ export default function Navbar() {
                  href="/feed">
                  Realm
                 </Link>
-                <Link
-                 className="hover:text-indigo-500 hidden md:block font-semibold text-xs transition"
-     
-               href="/" >
-                 Post 
-               </Link >
              </div>
            )}
 
