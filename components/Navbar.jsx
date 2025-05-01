@@ -25,7 +25,15 @@ export default function Navbar() {
           </Link>
           
         </motion.div>
-        <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+        
+           {user && (
+             <div className="flex space-x-1 items-center justify-between">
+              <div className="hidden sm:ml-6 md:ml-0 sm:flex sm:space-x-8">
+              <Link
+                 className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                 href="/feed">
+                 Realm
+                </Link>
               <Link href="/developers" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                 Developers
               </Link>
@@ -39,13 +47,7 @@ export default function Navbar() {
                 For Employers
               </Link>
             </div>
-           {user && (
-             <div className="flex space-x-28 justify-between">
-                <Link
-                 className="hover:text-indigo-500 hidden md:block font-semibold text-xs transition"
-                 href="/feed">
-                 Realm
-                </Link>
+                
              </div>
            )}
 
