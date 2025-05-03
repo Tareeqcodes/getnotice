@@ -13,7 +13,7 @@ export default function weekly() {
                           <div className={`w-10 h-10 ${item === 1 ? 'bg-purple-200' : 'bg-gray-200'} rounded-full mr-3`}></div>
                           <div>
                             <h3 className="font-medium">
-                              {item === 1 ? 'Maya Patel' : `Developer ${item}`}
+                              {item === 1 ? 'Name cannot be blank' : `Developer ${item}`}
                               {item === 1 && <Award size={14} className="inline ml-1 text-purple-600" />}
                             </h3>
                             <p className="text-xs text-gray-500">Full Stack Developer</p>

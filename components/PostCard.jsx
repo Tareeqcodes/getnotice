@@ -55,7 +55,7 @@ export default function PostCard({ user }) {
   href={`mailto:${user?.email}?subject=Hiring Opportunity from DevsRealm&body=Hi ${user?.name},%0D%0A%0D%0AI came across your profile on Devs Realm and would love to connect regarding a potential opportunity.`}
   className="font-medium text-green-600 hover:underline text-sm"
 >
-  Interested / Hire
+  View profile
 </a>
 
       <button

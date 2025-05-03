@@ -10,7 +10,7 @@ export default function Navbar() {
    const {user} = useAuth()
   return (
     
-        <nav className="bg-white text-gray-500 px-6 py-4 flex justify-between items-center">
+        <nav className="bg-white text-gray-500 px-10 py-4 flex justify-between items-center">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -21,7 +21,7 @@ export default function Navbar() {
             className="flex items-center space-x-2"
           >
           <SparklesIcon className="h-6 w-6 text-indigo-500" />
-          <span className="text-xl font-bold">Devs Realm</span>
+          <span className="text-xl font-bold">Realm</span>
           </Link>
           
         </motion.div>
@@ -34,9 +34,6 @@ export default function Navbar() {
                  href="/feed">
                  Realm
                 </Link>
-              <Link href="/developers" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                Developers
-              </Link>
               <Link href="/challenges" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                 Challenges
               </Link>

@@ -10,6 +10,8 @@ import WeeklyNav from "./WeekyNav";
 import { useAuth } from '@/context/authContext';
 import { databases, Query } from '@/config/appwrite';
 import Spinner from "./Spinner";
+import VisibilityCard from "./VisibilityCard";
+import Card from "./Card";
 
 export default function FeedNav() {
     const [activeTab, setActiveTab] = useState('discover');
@@ -112,12 +114,13 @@ export default function FeedNav() {
                 {activeTab === 'discover' && (
                     <div className="p-4">
                         <WeeklyNav />
-                        <WeeklyDev 
+                        {/* <WeeklyDev 
                             projects={allProjects} 
                             users={allUsers} 
                             loading={loading} 
                             error={error} 
-                        />
+                        /> */}
+                        <Card />
                     </div>
                 )}
                 {activeTab === 'rankings' && <Ranking />}

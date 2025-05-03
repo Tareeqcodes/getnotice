@@ -1,6 +1,6 @@
 "use client"
 
-import { Award,  GitBranch, Heart, TrendingUp, Zap } from "lucide-react"
+import { Award, Heart, TrendingUp, Zap } from "lucide-react"
 
 export default function WeeklyNav() {
 
@@ -16,7 +16,7 @@ export default function WeeklyNav() {
                 <div className="flex items-center">
                   <div className="w-16 h-16 bg-white rounded-full mr-4"></div>
                   <div>
-                    <h3 className="font-bold text-lg">Maya Patel</h3>
+                    <h3 className="font-bold text-lg">Name cannot be blank</h3>
                     <p className="text-sm opacity-90">Full Stack Developer</p>
                     <div className="flex text-black gap-2 mt-1">
                       <span className="text-xs bg-white bg-opacity-20 px-2 py-1 rounded-full">React</span>
@@ -27,16 +27,13 @@ export default function WeeklyNav() {
                 </div>
                 <div className="mt-4 p-3 bg-black bg-opacity-10 rounded-lg">
                   <p className="text-sm">
-                    "Maya created an innovative accessibility tool that helps colorblind developers work more effectively with design systems. Her open-source contribution has already gained 200+ stars on GitHub."
+                    "He created an innovative accessibility tool that helps colorblind developers work more effectively with design systems. His open-source contribution has already gained 200+ stars on GitHub."
                   </p>
                 </div>
                 <div className="flex justify-between items-center mt-3">
                   <button className="bg-white text-purple-600 px-4 py-2 rounded-full text-sm font-medium">View Profile</button>
-                  <div className="flex gap-3">
-                    <div className="flex items-center">
-                      <GitBranch size={16} className="mr-1" />
-                      <span className="text-sm">437</span>
-                    </div>
+                  <div className="gap-3">
+                    
                     <div className="flex items-center">
                       <Heart size={16} className="mr-1" />
                       <span className="text-sm">182</span>
@@ -61,7 +58,7 @@ export default function WeeklyNav() {
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
                       <div>
-                        <h3 className="font-medium">Alex Johnson</h3>
+                        <h3 className="font-medium">Name cannot be blank</h3>
                         <p className="text-xs text-gray-500">Frontend • 10 mo exp</p>
                       </div>
                       <div className="ml-auto flex items-center text-amber-500">
@@ -90,7 +87,7 @@ export default function WeeklyNav() {
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-gray-200 rounded-full mr-3"></div>
                     <div>
-                      <h3 className="font-medium">Sarah Chen</h3>
+                      <h3 className="font-medium">Name cannot be blank</h3>
                       <p className="text-xs text-gray-500">Frontend Developer • React • 1 year exp</p>
                     </div>
                     <div className="ml-auto px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full flex items-center">
