@@ -22,7 +22,8 @@ export default function PersonalInfo() {
     openToWork: false,
     email: "",
     user_id: "",
-    title: ""
+    title: "",
+    bio: ""
   })
    useEffect( () => {
     if (!user || !user.email) return;
@@ -44,7 +45,8 @@ export default function PersonalInfo() {
             openToWork: doc.openToWork || false,
             email: doc.email || "",
             user_id: doc.user_id || "",
-            title: doc.title || ""
+            title: doc.title || "",
+            bio: doc.bio || ""
             
           })
          } else {
@@ -173,6 +175,21 @@ export default function PersonalInfo() {
             placeholder="https://github.com/username"
             className="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-purple-500"
           />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="bio">
+            Bio
+            </label>
+            
+            <textarea name="bio" id="bio"
+            onChange={handleChange}
+            value={formData.bio}
+            placeholder="Tell us a little about your self"
+            className="pt-2 pb-16 px-3 border border-gray-300"
+            >
+
+            </textarea>
+            
         </div>
 
         <div className="col-span-1 md:col-span-2 flex items-center gap-4 mt-4">

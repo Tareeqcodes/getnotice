@@ -4,8 +4,7 @@ import PostCard from './PostCard';
 import Spinner from './Spinner';
 
 export default function WeeklyDev({ projects, users, loading, error }) {
-    const [filter, setFilter] = useState('all'); // You can add filters if needed (all, popular, recent, etc.)
-
+    const [filter, setFilter] = useState('all');
     if (loading) return <Spinner />;
     if (error) return <div>Error loading content: {error.message}</div>;
     if (!projects?.length || !users?.length) return <div className="text-center py-8">No projects available</div>;
@@ -46,7 +45,7 @@ export default function WeeklyDev({ projects, users, loading, error }) {
                 </div>
             </div>
 
-            <div className="grid gap-3 grid-cols-1 md:grid-cols-3">
+            <div className="grid gap-3 grid-cols-1 md:grid-cols-1">
                 {mapUsers.map(({ user, projects }) => (
                     <PostCard
                         key={user.user_id}

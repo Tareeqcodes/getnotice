@@ -22,8 +22,7 @@ export default function MyProjects({ post }) {
             alt={post.title || "Project image"}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            style={{ objectFit: 'cover' }}
-            className="rounded-lg"
+            className="rounded-lg object-cover"
           />
         </div>
         <div className="flex justify-between mb-3">

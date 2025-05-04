@@ -7,7 +7,7 @@ export default function Card() {
   
   return (
     <div className="w-full max-w-md rounded-xl my-5 overflow-hidden bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700">
-      {/* Top Section - Developer Info */}
+
       <div className="relative">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-10 h-24"></div>
@@ -19,7 +19,7 @@ export default function Card() {
               D
             </div>
             <div className="absolute -bottom-1 -right-1 bg-green-500 text-white text-xs rounded-full px-1 py-0.5 font-medium border border-white dark:border-slate-800">
-              HIRING
+              HIRE
             </div>
           </div>
           
@@ -169,7 +169,7 @@ export default function Card() {
               <div className="bg-slate-50 dark:bg-slate-700/30 rounded-lg p-3 flex flex-col items-center justify-center">
                 <LucideBarChart2 size={20} className="text-emerald-500 mb-1" />
                 <span className="text-lg font-bold text-slate-800 dark:text-white">28k+</span>
-                <span className="text-xs text-slate-500 dark:text-slate-400">Downloads</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">users</span>
               </div>
               
               <div className="bg-slate-50 dark:bg-slate-700/30 rounded-lg p-3 flex flex-col items-center justify-center">
@@ -208,9 +208,6 @@ export default function Card() {
       <div className="border-t border-slate-200 dark:border-slate-700 p-3 flex justify-between items-center">
           <button className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-white">
             View Profile
-          </button>
-          <button className="text-sm font-medium bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1 rounded-md">
-            Endorse
           </button>
         
       </div>
