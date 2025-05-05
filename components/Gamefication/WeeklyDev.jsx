@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
-import PostCard from './PostCard';
-import Spinner from './Spinner';
+import PostCard from '../PostCard';
+import Spinner from '../Spinner';
 
 export default function WeeklyDev({ projects, users, loading, error }) {
     const [filter, setFilter] = useState('all');

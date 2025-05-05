@@ -2,14 +2,8 @@
 "use client";
 import Link from "next/link";
 import { FiHome, FiSettings } from "react-icons/fi";
-import { IoIosLogOut } from "react-icons/io";
-import { FaPlus } from "react-icons/fa";
-import { useAuth } from "@/context/authContext";
-
 
 const Dashbar = () => {
-  const { logout } = useAuth();
-  
   return (
     <aside className="hidden w-20 h-screen bg-white border-r border-gray-200 p-4 md:flex md:flex-col items-center md:items-start">  
       <nav className="space-y-9 mt-10 w-full">

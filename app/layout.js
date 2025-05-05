@@ -102,7 +102,9 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <main>
         <Navbar />
+        <div className="mb-20">
         {children}
+        </div>
         <Footer />
          <Bottomnav />
           </main>

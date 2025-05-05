@@ -1,8 +1,8 @@
 
 'use client'
 import React, { useState } from 'react'
-import Account from '@/components/Account'
-import PersonalInfo from '@/components/PersonalInfo'
+import Account from '@/components/Account/Account'
+import PersonalInfo from '@/components/Account/PersonalInfo'
 
 export default function Page() {
    const [ activeTab, setActiveTab] = useState('personal')

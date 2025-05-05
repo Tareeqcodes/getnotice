@@ -9,7 +9,7 @@ export default function Card() {
     <div className="w-full max-w-md rounded-xl my-5 overflow-hidden bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-slate-700">
 
       <div className="relative">
-        {/* Background Pattern */}
+  
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-10 h-24"></div>
         
         

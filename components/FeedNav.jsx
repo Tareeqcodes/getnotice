@@ -1,23 +1,24 @@
 'use client'
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
-import WeeklyDev from "./WeeklyDev";
-import Ranking from "./Ranking";
-import Jobs from "./Jobs";
-import MyProjects from "./MyProjects";
-import ProjectNav from "./ProjectNav";
+import WeeklyDev from "./Gamefication/WeeklyDev";
+import Ranking from "./Gamefication/Ranking";
+import JobsCard from "./job/JobsCard";
+import MyProjects from "./Projects/MyProjects";
+import ProjectNav from "./Projects/ProjectNav";
 import WeeklyNav from "./WeekyNav";
 import { useAuth } from '@/context/authContext';
 import { databases, Query } from '@/config/appwrite';
 import Spinner from "./Spinner";
-
-import Card from "./Card";
-
+ 
 export default function FeedNav() {
     const [activeTab, setActiveTab] = useState('discover');
     const [userProjects, setUserProjects] = useState([]);
     const [allProjects, setAllProjects] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
+    const [jobs, setJobs] = useState([]);
+    const [loadingJobs, setLoadingJobs] = useState(false);
+    const [jobsError, setJobsError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { user } = useAuth();
@@ -27,6 +28,8 @@ export default function FeedNav() {
             fetchAllProjectsAndUsers();
         } else if (activeTab === 'project' && user) {
             fetchUserProjects();
+        } else if (activeTab === 'jobs') {
+            fetchJobs();
         }
     }, [activeTab, user]);
     
@@ -75,6 +78,24 @@ export default function FeedNav() {
         }
     };
 
+    const fetchJobs = async () => {
+        setLoadingJobs(true);
+        setJobsError(null);
+        try {
+            const response = await databases.listDocuments(
+                process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_JOBS_ID
+            );
+            
+            setJobs(response.documents);
+            setLoadingJobs(false);
+        } catch (err) {
+            console.error("Error fetching jobs:", err);
+            setJobsError(err);
+            setLoadingJobs(false);
+        }
+    };
+
     return (
         <div className="bg-white p-3 mx-auto md:mx-16 mt-5 shadow">
             <div className="flex items-center bg-gray-100 rounded-full px-4 py-2">
@@ -120,11 +141,16 @@ export default function FeedNav() {
                             loading={loading} 
                             error={error} 
                         /> 
-                        <Card />
                     </div>
                 )}
                 {activeTab === 'rankings' && <Ranking />}
-                {activeTab === 'jobs' && <Jobs />}
+                {activeTab === 'jobs' && (
+                        <JobsCard 
+                            jobs={jobs} 
+                            loading={loadingJobs} 
+                            error={jobsError} 
+                        />
+                )}
                 {activeTab === 'project' && (
                     <div className="p-4">
                         <ProjectNav />

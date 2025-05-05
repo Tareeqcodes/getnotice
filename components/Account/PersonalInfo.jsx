@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react"
 import { ID, databases, Query } from "@/config/appwrite"
 import { useAuth } from "@/context/authContext"
-import Spinner from "./Spinner"
+import Spinner from "@/components/Spinner"
 import { FaGithub, FaUserEdit } from "react-icons/fa"
 import { FiCode } from "react-icons/fi"
 import { Switch } from "@headlessui/react"
