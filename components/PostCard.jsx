@@ -1,15 +1,13 @@
 'use client';
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { FiThumbsUp } from 'react-icons/fi';
+import { FiThumbsUp, FiGithub, FiExternalLink } from 'react-icons/fi';
 import { Star, Zap } from 'lucide-react';
 import Image from 'next/image';
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
 
 const bucketId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_STORAGE_ID;
 const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
 
-// Skill expertise levels based on technologies
 const SKILL_CATEGORIES = {
   FRONTEND: ['react', 'nextjs', 'vue', 'angular', 'svelte', 'javascript', 'typescript', 'tailwind', 'css', 'html', 'bootstrap', 'sass'],
   BACKEND: ['node', 'express', 'django', 'flask', 'fastapi', 'spring', 'laravel', 'php', 'ruby', 'rails', 'python', 'java', 'c#', '.net'],
@@ -94,15 +92,14 @@ const calculateUserMatchStrength = (user, projects) => {
 };
 
 export default function PostCard({ user, projects }) {
-  // Check if projects is an array or a single project object
   const projectsArray = Array.isArray(projects) ? projects : [projects];
   
-  // Calculate the user's match strength using the custom logic
+  // Calculate the user's match strength
   const matchData = useMemo(() => calculateUserMatchStrength(user, projectsArray), [user, projectsArray]);
   
   return (
     <div className="overflow-hidden shadow-lg bg-white border border-gray-100 rounded-xl hover:shadow-xl transition-all duration-300">
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-20 md:gap-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -125,10 +122,11 @@ export default function PostCard({ user, projects }) {
                 <div className="flex items-center">
                   <h4 className="font-semibold text-gray-800">{user?.name || 'Unknown Dev'}</h4>
                   {matchData.expertiseLevel && (
-                    <div className={`ml-2 bg-${matchData.expertiseLevel.color}-100 dark:bg-${matchData.expertiseLevel.color}-900/30 px-1.5 py-0 rounded text-xs font-medium text-${matchData.expertiseLevel.color}-800 dark:text-${matchData.expertiseLevel.color}-300`}>
-                      {matchData.expertiseLevel.label}
-                    </div>
-                  )}
+              <div className="ml-2 bg-indigo-100 dark:bg-indigo-900/30 px-1.5 py-0 rounded text-xs font-semibold text-indigo-800">
+              {matchData.expertiseLevel.label}
+               </div>
+                )}
+
                 </div>
                 <p className="text-xs text-gray-500">{user?.title}</p>
               </div>
@@ -158,17 +156,18 @@ export default function PostCard({ user, projects }) {
             ))}
           </div>
            
-          <div className="border-t border-gray-100 pt-4 mt-4 flex justify-between">
-            <motion.button
-             whileHover={{ scale: 1.05 }}
-             whileTap={{ scale: 0.95 }}
-             className="bg-blue-50 text-blue-800 px-4 py-2 cursor-pointer rounded-md text-sm">
-              View Profile
-             </motion.button>
+          <div className="mb-10 mt-5 flex justify-between">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center cursor-pointer gap-2 px-4 py-2 bg-purple-100 hover:bg-purple-200 text-purple-800 text-sm font-semibold rounded-lg transition"
+              className="bg-blue-50 text-blue-800 px-2 py-1 cursor-pointer rounded-md text-sm"
+            >
+              View Profile
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center cursor-pointer gap-2 px-2 py-1 bg-purple-100 hover:bg-purple-200 text-purple-800 text-sm font-semibold rounded-lg transition"
             >
               <FiThumbsUp className="text-purple-700" /> Endorse
             </motion.button>
@@ -177,15 +176,16 @@ export default function PostCard({ user, projects }) {
 
         <div className="bg-gray-50 p-5 border-l border-gray-100">
           <div className="flex justify-between items-center mb-3">
-            <h3 className="text-xs uppercase text-gray-500 font-semibold tracking-wider">Projects</h3>
+            <h3 className="text-xs uppercase text-gray-500 font-semibold tracking-wider">
+              Featured Project
+            </h3>
             <div className="flex items-center text-xs text-amber-600 dark:text-amber-400 font-medium">
               <Star size={14} className="mr-1" fill="currentColor" />
               Featured
             </div>
           </div>
-          <div className="space-y-4">
-            {projectsArray.map(project => {
-              // Generate image URL for each project if imageFile exists
+          <div className="overflow-hidden">
+            {[projectsArray[0]].map(project => {
               const imageUrl = project.imageFile 
                 ? `https://fra.cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${project.imageFile}/view?project=${projectId}`
                 : '/images/1.png';
@@ -223,6 +223,11 @@ export default function PostCard({ user, projects }) {
                 </div>
               );
             })}
+            {projectsArray.length > 1 && (
+              <div className="text-center text-xs text-gray-500 mt-2">
+                +{projectsArray.length - 1} more projects
+              </div>
+            )}
           </div>
         </div>
       </div>
