@@ -1,15 +1,16 @@
 'use client'
-import { useState } from 'react';
+import { SlidersHorizontal } from 'lucide-react';
 import PostCard from '../PostCard';
 import Spinner from '../Spinner';
 
 export default function WeeklyDev({ projects, users, loading, error }) {
-    const [filter, setFilter] = useState('all');
+   
     if (loading) return <Spinner />;
     if (error) return <div>Error loading content: {error.message}</div>;
-    if (!projects?.length || !users?.length) return <div className="text-center py-8">No projects available</div>;
+    if (!projects?.length || !users?.length) return
+     <div className="text-center py-8">
+        No projects available</div>;
 
-    // Map users with their projects
     const mapUsers = users.map(user => {
         const userProjects = projects.filter(project => project.user_id === user.user_id);
         return { user, projects: userProjects };
@@ -23,25 +24,9 @@ export default function WeeklyDev({ projects, users, loading, error }) {
         <div>
             <div className="flex justify-between items-center pt-5 mb-6">
                 <h2 className="text-xl font-semibold">Developers Showcase</h2>
-                <div className="flex space-x-2">
-                    <button 
-                        onClick={() => setFilter('all')}
-                        className={`px-3 py-1 rounded ${filter === 'all' ? 'bg-purple-600 text-white' : 'bg-gray-100'}`}
-                    >
-                        All
-                    </button>
-                    <button 
-                        onClick={() => setFilter('popular')}
-                        className={`px-3 py-1 rounded ${filter === 'popular' ? 'bg-purple-600 text-white' : 'bg-gray-100'}`}
-                    >
-                        Popular
-                    </button>
-                    <button 
-                        onClick={() => setFilter('recent')}
-                        className={`px-3 py-1 rounded ${filter === 'recent' ? 'bg-purple-600 text-white' : 'bg-gray-100'}`}
-                    >
-                        Recent
-                    </button>
+                <div className="flex space-x-2 items-center cursor-pointer">
+                <SlidersHorizontal size={18} className="text-current" />
+                    <h3 className="text-md font-medium">Filter</h3>
                 </div>
             </div>
 

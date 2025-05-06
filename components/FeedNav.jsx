@@ -6,9 +6,9 @@ import Ranking from "./Gamefication/Ranking";
 import JobsCard from "./job/JobsCard";
 import MyProjects from "./Projects/MyProjects";
 import ProjectNav from "./Projects/ProjectNav";
-import WeeklyNav from "./WeekyNav";
+import WeeklyNav from "./Gamefication/WeekyNav";
 import { useAuth } from '@/context/authContext';
-import { databases, Query } from '@/config/appwrite';
+import { databases, Query } from '@/config/appwrite'; 
 import Spinner from "./Spinner";
  
 export default function FeedNav() {

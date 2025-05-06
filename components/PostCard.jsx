@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FiThumbsUp, FiGithub, FiExternalLink } from 'react-icons/fi';
 import { Star, Zap } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const bucketId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_STORAGE_ID;
 const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
@@ -157,13 +158,16 @@ export default function PostCard({ user, projects }) {
           </div>
            
           <div className="mb-10 mt-5 flex justify-between">
-            <motion.button
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-blue-50 text-blue-800 px-2 py-1 cursor-pointer rounded-md text-sm"
             >
+              <Link
+               href="/profile">
               View Profile
-            </motion.button>
+              </Link>
+            </motion.div>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -175,15 +179,11 @@ export default function PostCard({ user, projects }) {
         </motion.div>
 
         <div className="bg-gray-50 p-5 border-l border-gray-100">
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="text-xs uppercase text-gray-500 font-semibold tracking-wider">
-              Featured Project
-            </h3>
-            <div className="flex items-center text-xs text-amber-600 dark:text-amber-400 font-medium">
+            <div className="flex mb-5 items-center text-xs text-amber-600 dark:text-amber-400 font-medium">
               <Star size={14} className="mr-1" fill="currentColor" />
-              Featured
+              Featured Project
             </div>
-          </div>
+        
           <div className="overflow-hidden">
             {[projectsArray[0]].map(project => {
               const imageUrl = project.imageFile 
