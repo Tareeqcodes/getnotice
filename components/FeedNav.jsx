@@ -10,23 +10,21 @@ import WeeklyNav from "./Gamefication/WeekyNav";
 import { useAuth } from '@/context/authContext';
 import { databases, Query } from '@/config/appwrite'; 
 import Spinner from "./Spinner";
- 
+import { useUser } from '@/context/UserContext';
+
 export default function FeedNav() {
+    const { allUsers, allProjects, loading, error } = useUser();
     const [activeTab, setActiveTab] = useState('discover');
     const [userProjects, setUserProjects] = useState([]);
-    const [allProjects, setAllProjects] = useState([]);
-    const [allUsers, setAllUsers] = useState([]);
+    const [loadingProjects, setLoadingProjects] = useState(false);
+    const [projectsError, setProjectsError] = useState(null);
     const [jobs, setJobs] = useState([]);
     const [loadingJobs, setLoadingJobs] = useState(false);
     const [jobsError, setJobsError] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
     const { user } = useAuth();
     
     useEffect(() => {
-        if (activeTab === 'discover') {
-            fetchAllProjectsAndUsers();
-        } else if (activeTab === 'project' && user) {
+        if (activeTab === 'project' && user) {
             fetchUserProjects();
         } else if (activeTab === 'jobs') {
             fetchJobs();
@@ -36,7 +34,7 @@ export default function FeedNav() {
     const fetchUserProjects = async () => {
         if (!user) return;
         
-        setLoading(true);
+        setLoadingProjects(true);
         try {
             const userId = user.$id;
             const response = await databases.listDocuments(
@@ -46,35 +44,11 @@ export default function FeedNav() {
             );
             
             setUserProjects(response.documents);
-            setLoading(false);
+            setLoadingProjects(false);
         } catch (err) {
             console.error("Error fetching projects:", err);
-            setError(err);
-            setLoading(false);
-        }
-    };
-
-    const fetchAllProjectsAndUsers = async () => {
-        setLoading(true);
-        try {
-            const [projectsResponse, usersResponse] = await Promise.all([
-                databases.listDocuments(
-                    process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
-                    process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID
-                ),
-                databases.listDocuments(
-                    process.env.NEXT_PUBLIC_APPWRITE_DB_ID, 
-                    process.env.NEXT_PUBLIC_APPWRITE_USERS_COLLECTION_ID
-                )
-            ]);
-            
-            setAllProjects(projectsResponse.documents);
-            setAllUsers(usersResponse.documents);
-            setLoading(false);
-        } catch (err) {
-            console.error("Error fetching data:", err);
-            setError(err);
-            setLoading(false);
+            setProjectsError(err);
+            setLoadingProjects(false);
         }
     };
 
@@ -154,9 +128,9 @@ export default function FeedNav() {
                 {activeTab === 'project' && (
                     <div className="p-4">
                         <ProjectNav />
-                        {loading ? (
+                        {loadingProjects ? (
                             <Spinner />
-                        ) : error ? (
+                        ) : projectsError ? (
                             <div>Error loading projects: {error.message}</div>
                         ) : userProjects.length > 0 ? (
                             userProjects.map((post) => <MyProjects key={post.$id} post={post} />)

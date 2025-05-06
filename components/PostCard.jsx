@@ -5,99 +5,16 @@ import { FiThumbsUp, FiGithub, FiExternalLink } from 'react-icons/fi';
 import { Star, Zap } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useUser } from '@/context/UserContext';
 
 const bucketId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_STORAGE_ID;
 const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
 
-const SKILL_CATEGORIES = {
-  FRONTEND: ['react', 'nextjs', 'vue', 'angular', 'svelte', 'javascript', 'typescript', 'tailwind', 'css', 'html', 'bootstrap', 'sass'],
-  BACKEND: ['node', 'express', 'django', 'flask', 'fastapi', 'spring', 'laravel', 'php', 'ruby', 'rails', 'python', 'java', 'c#', '.net'],
-  MOBILE: ['react native', 'flutter', 'swift', 'kotlin', 'ios', 'android', 'xamarin', 'ionic'],
-  DATABASE: ['mongodb', 'mysql', 'postgresql', 'sqlite', 'firebase', 'supabase', 'dynamodb', 'redis', 'sql', 'nosql'],
-  DEVOPS: ['docker', 'kubernetes', 'aws', 'azure', 'gcp', 'ci/cd', 'jenkins', 'terraform', 'github actions'],
-  AI_ML: ['tensorflow', 'pytorch', 'machine learning', 'deep learning', 'nlp', 'computer vision', 'ai']
-};
-
-// Expertise levels based on skill categories and project counts
-const EXPERTISE_LEVELS = [
-  { min: 90, label: 'Top 5%', color: 'indigo' },
-  { min: 80, label: 'Expert', color: 'blue' },
-  { min: 70, label: 'Advanced', color: 'green' },
-  { min: 50, label: 'Intermediate', color: 'yellow' },
-  { min: 0, label: 'Beginner', color: 'gray' }
-];
-
-const calculateUserMatchStrength = (user, projects) => {
-  // Ensure projects is an array
-  const projectsArray = Array.isArray(projects) ? projects : [projects];
-  const projectCount = projectsArray.length;
-  
-  // 1. Base percentage from project count (max 5 projects = 60% base)
-  const projectPercentage = Math.min(projectCount / 5 * 60, 60);
-  
-  // 2. Get user skills and normalize them
-  const userSkills = user?.skills ? user.skills.toLowerCase().split(',').map(skill => skill.trim()) : [];
-  
-  // 3. Get all tech stacks from projects and normalize them
-  const projectTechStacks = projectsArray
-    .filter(project => project?.techStack)
-    .flatMap(project => 
-      project.techStack.toLowerCase().split(',').map(tech => tech.trim())
-    );
-  
-  const uniqueTechStacks = [...new Set(projectTechStacks)];
-  
-  // 4. Calculate skill match percentage
-  // Count how many of user's skills match with project tech stacks
-  let matchingSkillsCount = 0;
-  userSkills.forEach(skill => {
-    if (uniqueTechStacks.some(tech => tech.includes(skill) || skill.includes(tech))) {
-      matchingSkillsCount++;
-    }
-  });
-  
-  // Calculate skill match percentage (max 30%)
-  const skillMatchPercentage = userSkills.length > 0 
-    ? Math.min((matchingSkillsCount / userSkills.length) * 30, 30) 
-    : 0;
-  
-  // 5. Calculate skill diversity bonus (max 10%)
-  const skillCategories = new Set();
-  userSkills.forEach(skill => {
-    for (const [category, technologies] of Object.entries(SKILL_CATEGORIES)) {
-      if (technologies.some(tech => skill.includes(tech) || tech.includes(skill))) {
-        skillCategories.add(category);
-        break;
-      }
-    }
-  });
-  
-  const diversityBonus = Math.min(skillCategories.size * 2, 10);
-  
-  // 6. Calculate total match strength (capped at 97% to account for real-world imperfection)
-  let totalMatchStrength = Math.min(projectPercentage + skillMatchPercentage + diversityBonus, 97);
-  
-  // Round to the nearest integer
-  totalMatchStrength = Math.round(totalMatchStrength);
-  
-  // 7. Determine expertise level
-  const expertiseLevel = EXPERTISE_LEVELS.find(level => totalMatchStrength >= level.min);
-  
-  return {
-    matchStrength: totalMatchStrength,
-    expertiseLevel,
-    projectContribution: projectPercentage,
-    skillMatchContribution: skillMatchPercentage,
-    diversityBonus
-  };
-};
-
 export default function PostCard({ user, projects }) {
+  const { calculateUserMatchStrength } = useUser();
   const projectsArray = Array.isArray(projects) ? projects : [projects];
-  
-  // Calculate the user's match strength
   const matchData = useMemo(() => calculateUserMatchStrength(user, projectsArray), [user, projectsArray]);
-  
+
   return (
     <div className="overflow-hidden shadow-lg bg-white border border-gray-100 rounded-xl hover:shadow-xl transition-all duration-300">
       <div className="grid md:grid-cols-2 gap-20 md:gap-4">

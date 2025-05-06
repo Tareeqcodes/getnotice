@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import ".././assets/globals.css";
 import { AuthProvider } from "../context/authContext";
+import { UserProvider } from "@/context/UserContext";
 import Navbar from "../components/Navbar";
 import Footer from "@/components/Footer";
 import Bottomnav from "@/components/Buttomnav";
@@ -102,8 +103,11 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <main>
         <Navbar />
+
         <div className="mb-20">
-        {children}
+        <UserProvider>
+          {children}
+        </UserProvider>
         </div>
         <Footer />
          <Bottomnav />
