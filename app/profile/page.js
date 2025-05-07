@@ -1,11 +1,9 @@
- 
- import Profile from '@/components/DevProfile/Profile'
-import ProfileNav from '@/components/DevProfile/ProfileNav'
+import React from 'react'
 
 export default function page() {
   return (
-    <div>
-        <ProfileNav />
-    </div>
+    <>
+     <h1>Hello</h1>
+    </>
   )
 }
