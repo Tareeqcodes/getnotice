@@ -5,6 +5,10 @@ import { useUser } from '@/context/UserContext';
 import { Zap, ThumbsUp, Github, Mail, Linkedin, Twitter, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/context/authContext';
+import Showcase from './Showcase';
+import Impact from './Impact';
+import UserProject from './UserProject';
+import UserSkill from './UserSkill';
 
 export default function ProfileNav() {
   const [activeTab, setActiveTab] = useState('showcase');
@@ -176,10 +180,10 @@ export default function ProfileNav() {
       </div>
 
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6">
-        {activeTab === 'showcase' && <div>Showcase Content</div>}
-        {activeTab === 'skills' && <div>Skills Content</div>}
-        {activeTab === 'projects' && <div>Projects Content</div>}
-        {activeTab === 'impact' && <div>Impact Content</div>}
+        {activeTab === 'showcase' && <Showcase />}
+        {activeTab === 'skills' && <UserSkill />}
+        {activeTab === 'projects' && <UserProject />}
+        {activeTab === 'impact' && <Impact />}
       </div>
     </div>
   );

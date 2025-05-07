@@ -10,7 +10,7 @@ export default function WeeklyDev({ projects, users, loading, error }) {
     if (!projects?.length || !users?.length) return
      <div className="text-center py-8">
         No projects available</div>;
-
+ 
     const mapUsers = users.map(user => {
         const userProjects = projects.filter(project => project.user_id === user.user_id);
         return { user, projects: userProjects };

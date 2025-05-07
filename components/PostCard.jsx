@@ -10,7 +10,7 @@ import { useUser } from '@/context/UserContext';
 const bucketId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_STORAGE_ID;
 const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
 
-export default function PostCard({ user, projects }) {
+export default function PostCard({ user, projects }) { 
   const { calculateUserMatchStrength } = useUser();
   const projectsArray = Array.isArray(projects) ? projects : [projects];
   const matchData = useMemo(() => calculateUserMatchStrength(user, projectsArray), [user, projectsArray]);
@@ -81,7 +81,7 @@ export default function PostCard({ user, projects }) {
               className="bg-blue-50 text-blue-800 px-2 py-1 cursor-pointer rounded-md text-sm"
             >
               <Link
-               href="/profile">
+               href={`/profile/${user.$id}`}>
               View Profile
               </Link>
             </motion.div>
