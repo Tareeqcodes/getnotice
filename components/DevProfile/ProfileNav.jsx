@@ -23,8 +23,7 @@ export default function ProfileNav({params}) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      
+    <div className="max-w-4xl max-h-screen mx-auto">
       <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden mb-8">
         <div className="relative h-32 bg-gradient-to-r from-indigo-500 to-purple-500">
           <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-black/30 to-transparent"></div>

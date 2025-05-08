@@ -77,19 +77,17 @@ export function UserProvider({ children }) {
   };
 
   useEffect(() => {
-    const fetchData = async (userId, docId) => {
+    const fetchAllData = async (docId, userId) => {
       setLoading(true);
       try {
         const [projectsResponse, usersResponse] = await Promise.all([
           databases.listDocuments(
             process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
-            process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID,
-            docId
+            process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID
           ),
           databases.listDocuments(
             process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
-            process.env.NEXT_PUBLIC_APPWRITE_USERS_COLLECTION_ID,
-            userId
+            process.env.NEXT_PUBLIC_APPWRITE_USERS_COLLECTION_ID
           )
         ]);
 
@@ -103,7 +101,7 @@ export function UserProvider({ children }) {
       }
     };
 
-    fetchData();
+    fetchAllData();
   }, []);
 
   const value = {
