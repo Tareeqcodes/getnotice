@@ -14,9 +14,8 @@ const SKILL_CATEGORIES = {
 const EXPERTISE_LEVELS = [
   { min: 90, label: 'Top 5%', color: 'indigo' },
   { min: 80, label: 'Expert', color: 'blue' },
-  { min: 70, label: 'Advanced', color: 'green' },
-  { min: 50, label: 'Intermediate', color: 'yellow' },
-  { min: 0, label: 'Beginner', color: 'gray' }
+  { min: 60, label: 'Advanced', color: 'green' },
+  { min: 0, label: 'Intermediate', color: 'yellow' },
 ];
 
 const UserContext = createContext();
@@ -77,7 +76,7 @@ export function UserProvider({ children }) {
   };
 
   useEffect(() => {
-    const fetchAllData = async (docId, userId) => {
+    const fetchAllData = async () => {
       setLoading(true);
       try {
         const [projectsResponse, usersResponse] = await Promise.all([

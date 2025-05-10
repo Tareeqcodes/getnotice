@@ -1,15 +1,16 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import { Zap, ThumbsUp, Github, Mail, Linkedin, Twitter, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useUser } from '@/context/UserContext';
-import { databases } from '@/config/appwrite';
+import { databases, Query } from '@/config/appwrite';
 import Showcase from '@/components/DevProfile/Showcase';
 import UserProject from '@/components/DevProfile/UserProject';
 import UserSkill from '@/components/DevProfile/UserSkill';
 import Impact from '@/components/DevProfile/Impact';
 import Spinner from '@/components/Spinner';
+import { useAuth } from '@/context/authContext';
 
 
 export default function page() {
@@ -17,18 +18,28 @@ export default function page() {
   const params = useParams();
   const { id } = params;
   const [currentUser, setCurrenUser] = useState(null)
+  const [userProjects, setUserProjects] = useState([])
   const { calculateUserMatchStrength } = useUser();
    const [loading, setLoading] = useState(true)
+   const { user } = useAuth()
 
   useEffect(() => {
     const fetchData = async() =>{
       try {
-        const response = await databases.getDocument(
-          process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
-          process.env.NEXT_PUBLIC_APPWRITE_USERS_COLLECTION_ID,
-          id
-        )
-        setCurrenUser(response)
+        const [userResponse, projectsResponse] = await Promise.all([
+          databases.getDocument(
+            process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
+            process.env.NEXT_PUBLIC_APPWRITE_USERS_COLLECTION_ID,
+            id
+          ),
+          databases.listDocuments(
+            process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
+            process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID,
+            [Query.equal('user_id', user.$id)]
+          )
+        ])
+        setCurrenUser(userResponse)
+        setUserProjects(projectsResponse.documents || [])
         setLoading(false)
       } catch (error) {
         console.log('errro fetching data', error)
@@ -36,24 +47,32 @@ export default function page() {
     }
     fetchData()
   }, [id])
-  
-  const matchData = currentUser ? calculateUserMatchStrength(currentUser) : null;
 
-  if(!currentUser || loading) {
+  // Fix in page.js:
+const matchData = useMemo(() => {
+  if (currentUser && userProjects) {
+    // Make sure userProjects is treated as an array
+    const projectsArray = Array.isArray(userProjects) ? userProjects : [userProjects];
+    return calculateUserMatchStrength(currentUser, projectsArray);
+  }
+  return null;
+}, [currentUser, userProjects]);
+
+  if(loading) {
     return <Spinner />
   }
-
-  
+  if(!currentUser) {
+    return <div>User not found</div>
+  }
 
   return (
-    <div className="max-w-4xl max-h-screen mx-auto">
+    <div className="max-w-4xl max-h-screen overflow-y-scroll mx-auto">
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden mb-8">
             <div className="relative h-32 bg-gradient-to-r from-indigo-500 to-purple-500">
               <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-black/30 to-transparent"></div>
             </div>
             
             <div className="px-6 relative">
-              {/* Profile Section */}
               <div className="flex flex-col sm:flex-row sm:items-end -mt-16 mb-6">
                 <div className="w-24 h-24 rounded-full bg-white dark:bg-slate-700 border-4 border-white dark:border-slate-700 flex items-center justify-center text-2xl font-bold text-indigo-600 dark:text-indigo-400 relative">
                   {currentUser?.name?.charAt(0).toUpperCase() || 'D'}
@@ -71,6 +90,7 @@ export default function page() {
                         <h1 className="text-2xl font-bold text-slate-800 dark:text-white">
                           {currentUser?.name || 'Developer'}
                         </h1>
+                       
                         {matchData?.expertiseLevel && (
                           <div className="ml-3 bg-indigo-100 dark:bg-indigo-900/30 px-2 py-1 rounded text-sm font-semibold text-indigo-800 dark:text-indigo-300">
                             {matchData.expertiseLevel.label}
@@ -206,7 +226,7 @@ export default function page() {
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6">
           {activeTab === 'showcase' && <Showcase userId={id} />}
             {activeTab === 'skills' && <UserSkill userId={id} />}
-            {activeTab === 'projects' && <UserProject userId={id} />}
+            {activeTab === 'projects' && <UserProject userId={id} projects={userProjects || []} />}
             {activeTab === 'impact' && <Impact userId={id} />}
           </div>
         </div>
