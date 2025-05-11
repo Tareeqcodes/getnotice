@@ -132,7 +132,7 @@ export default function JobsCard({ jobs = [], loading = false, error = null }) {
                   )}
 
                   {/* You could add top match badge here based on your matching logic */}
-                  {/* <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">Top Match</span> */}
+                   {/* <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">Top Match</span>  */}
                 </div>
 
                 <p className="text-sm text-gray-700 mb-3">

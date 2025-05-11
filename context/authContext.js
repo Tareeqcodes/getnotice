@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
       await account.createMagicURLToken(
         ID.unique(),
         email,
-        'http://localhost:3000/verify'
+        'https://devsrealm.vercel.app/verify'
       );
        alert(' Check your email for the magic link!');
       toast.success( 'Check your email for the magic link!');

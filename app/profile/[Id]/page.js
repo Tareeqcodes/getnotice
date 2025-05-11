@@ -10,7 +10,6 @@ import UserProject from '@/components/DevProfile/UserProject';
 import UserSkill from '@/components/DevProfile/UserSkill';
 import Impact from '@/components/DevProfile/Impact';
 import Spinner from '@/components/Spinner';
-import { useAuth } from '@/context/authContext';
 
 
 export default function page() {
@@ -21,7 +20,6 @@ export default function page() {
   const [userProjects, setUserProjects] = useState([])
   const { calculateUserMatchStrength } = useUser();
    const [loading, setLoading] = useState(true)
-   const { user } = useAuth()
 
   useEffect(() => {
     const fetchData = async() =>{
@@ -35,7 +33,7 @@ export default function page() {
           databases.listDocuments(
             process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
             process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID,
-            [Query.equal('user_id', user.$id)]
+            [Query.equal('user_id', id)]
           )
         ])
         setCurrenUser(userResponse)
@@ -48,10 +46,8 @@ export default function page() {
     fetchData()
   }, [id])
 
-  // Fix in page.js:
 const matchData = useMemo(() => {
   if (currentUser && userProjects) {
-    // Make sure userProjects is treated as an array
     const projectsArray = Array.isArray(userProjects) ? userProjects : [userProjects];
     return calculateUserMatchStrength(currentUser, projectsArray);
   }
@@ -172,7 +168,7 @@ const matchData = useMemo(() => {
                 ))}
                 {currentUser?.skills?.split(',').length > 8 && (
                   <span className="text-sm bg-slate-100 text-slate-800 px-3 py-1 rounded-full font-medium">
-                    +{user.skills.split(',').length - 8} more
+                    +{currentUser.skills.split(',').length - 8} more
                   </span>
                 )}
               </div>
@@ -224,10 +220,10 @@ const matchData = useMemo(() => {
           </div>
     
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6">
-          {activeTab === 'showcase' && <Showcase userId={id} />}
-            {activeTab === 'skills' && <UserSkill userId={id} />}
-            {activeTab === 'projects' && <UserProject userId={id} projects={userProjects || []} />}
-            {activeTab === 'impact' && <Impact userId={id} />}
+          {activeTab === 'showcase' && <Showcase  />}
+            {activeTab === 'skills' && <UserSkill />}
+            {activeTab === 'projects' && <UserProject  projects={userProjects || []} />}
+            {activeTab === 'impact' && <Impact />}
           </div>
         </div>
   )
