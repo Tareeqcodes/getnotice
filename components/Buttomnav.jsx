@@ -24,13 +24,7 @@ export default function Bottomnav() {
            <HiOutlineUserGroup className="text-xl" />
            <span className="text-xs">Realm</span>
          </Link>
- 
-         <Link href="/post" className="flex flex-col items-center text-white hover:text-purple-600">
-           <FiPlus className="text-xl" />
-           <span className="text-xs">posts</span>
-         </Link>
- 
-         <Link href="/dashboard/setting" className="flex flex-col items-center text-white hover:text-purple-600">
+         <Link href="/dashboard" className="flex flex-col items-center text-white hover:text-purple-600">
            <FiSettings className="text-xl" />
            <span className="text-xs">Settings</span>
          </Link>

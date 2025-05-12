@@ -22,7 +22,7 @@ export default function PostCard({ user, projects }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="p-5 max-h-40"
+          className="p-5"
         >
           <div className="flex flex-col justify-between text-justify mb-4">  
             <div className="flex items-center gap-3">

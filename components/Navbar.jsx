@@ -42,31 +42,22 @@ return (
             )}
           </div>
 
-          {/* Auth Buttons */}
           <div className="flex items-center">
             {user ? (
               <Link 
                 href="/dashboard"
                 className="ml-4 px-4 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition"
               >
-                Dashboard →
+                Dashboard
               </Link>
             ) : (
               <div className="flex space-x-3">
-                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                  <Link
-                    href="/login"
-                    className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-indigo-600 transition"
-                  >
-                    Sign In
-                  </Link>
-                </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
-                    href="/signup"
+                    href="/login"
                     className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md shadow hover:bg-indigo-700 transition"
                   >
-                    Get Started
+                    Sign In
                   </Link>
                 </motion.div>
               </div>

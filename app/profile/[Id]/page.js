@@ -56,10 +56,9 @@ export default function page() {
     // fetchProjects();
   }, [id]);
 
- const userProjects = useMemo(() => {
-  return currentUser ? allProjects.filter(project => project.user_id === currentUser.id) : [];
-}, [currentUser, allProjects]);
-
+const userProjects = allProjects.filter(
+    (project) => project.user_id === currentUser.id
+  );
 
 const matchData = useMemo(() => {
   if (currentUser && userProjects) {
