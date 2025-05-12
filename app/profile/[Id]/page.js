@@ -17,34 +17,49 @@ export default function page() {
   const params = useParams();
   const { id } = params;
   const [currentUser, setCurrenUser] = useState(null)
-  const [userProjects, setUserProjects] = useState([])
-  const { calculateUserMatchStrength } = useUser();
+  // const [userProjects, setUserProjects] = useState([])
+  const { calculateUserMatchStrength, allProjects } = useUser();
    const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchData = async() =>{
+    const fetchUser = async () => {
       try {
-        const [userResponse, projectsResponse] = await Promise.all([
-          databases.getDocument(
-            process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
-            process.env.NEXT_PUBLIC_APPWRITE_USERS_COLLECTION_ID,
-            id
-          ),
-          databases.listDocuments(
-            process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
-            process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID,
-            [Query.equal('user_id', id)]
-          )
-        ])
-        setCurrenUser(userResponse)
-        setUserProjects(projectsResponse.documents || [])
-        setLoading(false)
+        const userResponse = await databases.getDocument(
+          process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
+          process.env.NEXT_PUBLIC_APPWRITE_USERS_COLLECTION_ID,
+          id
+        );
+        setCurrenUser(userResponse);
       } catch (error) {
-        console.log('errro fetching data', error)
+        console.log('Error fetching user:', error);
+      } finally {
+        setLoading(false)
       }
-    }
-    fetchData()
-  }, [id])
+    };
+
+    // const fetchProjects = async () => {
+    //   try {
+    //     const projectsResponse = await databases.listDocuments(
+    //       process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
+    //       process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID,
+    //       [Query.equal('user_id', id)]
+    //     );
+    //     setUserProjects(projectsResponse.documents || []);
+    //   } catch (error) {
+    //     console.log('Error fetching projects:', error);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+
+    fetchUser();
+    // fetchProjects();
+  }, [id]);
+
+ const userProjects = useMemo(() => {
+  return currentUser ? allProjects.filter(project => project.user_id === currentUser.id) : [];
+}, [currentUser, allProjects]);
+
 
 const matchData = useMemo(() => {
   if (currentUser && userProjects) {
@@ -54,7 +69,8 @@ const matchData = useMemo(() => {
   return null;
 }, [currentUser, userProjects]);
 
-  if(loading) {
+
+  if(loading || !allProjects) {
     return <Spinner />
   }
   if(!currentUser) {
@@ -222,7 +238,7 @@ const matchData = useMemo(() => {
           <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6">
           {activeTab === 'showcase' && <Showcase  />}
             {activeTab === 'skills' && <UserSkill />}
-            {activeTab === 'projects' && <UserProject  projects={userProjects || []} />}
+            {activeTab === 'projects' && <UserProject  projects={allProjects || []} />}
             {activeTab === 'impact' && <Impact />}
           </div>
         </div>

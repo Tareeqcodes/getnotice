@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { FiThumbsUp, FiGithub, FiExternalLink } from 'react-icons/fi';
-import { Star, Zap } from 'lucide-react';
+import { Star, Zap, CircleDot } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useUser } from '@/context/UserContext';
@@ -49,21 +49,32 @@ export default function PostCard({ user, projects }) {
                 <p className="text-xs text-gray-500">{user?.title}</p>
               </div>
             </div>
-            <div className="px-4 pb-2 pt-3">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 flex items-center">
-                  <Zap size={12} className="text-amber-500 mr-1" />
-                  Match Strength
+            <div className="mb-4 pt-2">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-xs font-medium text-gray-500 flex items-center">
+                <Zap size={12} className="text-amber-500 mr-1" />
+                Fit Score
+              </span>
+              <div className="flex items-center">
+                <span className="text-xs font-bold text-amber-600 mr-1">
+                  {matchData.matchStrength}%
                 </span>
-                <span className="text-xs font-bold text-amber-600 dark:text-amber-400">{matchData.matchStrength}%</span>
-              </div>
-              <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5">
-                <div 
-                  className="bg-gradient-to-r from-amber-400 to-amber-500 h-1.5 rounded-full" 
-                  style={{ width: `${matchData.matchStrength}%` }}
-                ></div>
+                <CircleDot size={12} className={matchData.matchStrength > 70 ? 'text-green-500' : 'text-yellow-500'} />
               </div>
             </div>
+            <div className="w-full bg-gray-200 rounded-full h-1.5">
+              <div 
+                className={`h-1.5 rounded-full ${
+                  matchData.matchStrength > 70 ? 'bg-green-500' : 
+                  matchData.matchStrength > 40 ? 'bg-amber-400' : 'bg-red-400'
+                }`} 
+                style={{ width: `${matchData.matchStrength}%` }}
+              />
+            </div>
+            <p className="text-xs text-gray-400 mt-1">
+              Based on {projectsArray.length} projects and skills matched
+            </p>
+          </div>
           </div>
 
           <div className="flex flex-wrap gap-2 mb-4">
@@ -72,9 +83,8 @@ export default function PostCard({ user, projects }) {
                 {skill.trim()}
               </span>
             ))}
-          </div>
-           
-          <div className="mb-10 mt-5 flex justify-between">
+          </div> 
+          <div className="mt-3 w-24">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -85,13 +95,6 @@ export default function PostCard({ user, projects }) {
               View Profile
               </Link>
             </motion.div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center cursor-pointer gap-2 px-2 py-1 bg-purple-100 hover:bg-purple-200 text-purple-800 text-sm font-semibold rounded-lg transition"
-            >
-              <FiThumbsUp className="text-purple-700" /> Endorse
-            </motion.button>
           </div>
         </motion.div>
 
