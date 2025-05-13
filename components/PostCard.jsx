@@ -1,7 +1,7 @@
 'use client';
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { FiThumbsUp, FiGithub, FiExternalLink } from 'react-icons/fi';
+import { FiGithub, FiExternalLink } from 'react-icons/fi';
 import { Star, Zap, CircleDot } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -49,6 +49,7 @@ export default function PostCard({ user, projects }) {
                 <p className="text-xs text-gray-500">{user?.title}</p>
               </div>
             </div>
+
             <div className="mb-4 pt-2">
             <div className="flex items-center justify-between mb-1">
               <span className="text-xs font-medium text-gray-500 flex items-center">

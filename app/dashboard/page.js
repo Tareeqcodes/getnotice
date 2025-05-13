@@ -6,7 +6,7 @@ import PersonalInfo from '@/components/Account/PersonalInfo'
 export default function Page() {
    const [ activeTab, setActiveTab] = useState('personal')
   return (
-    <div className="pl-0 w-full md:pl-20 space-x-5  mt-5">
+    <div className="w-full space-x-5  mt-5">
            <div className="flex space-x-4 mb-6">
         <button
           onClick={() => setActiveTab('personal')}

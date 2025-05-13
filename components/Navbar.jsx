@@ -32,7 +32,7 @@ return (
                 <NavLink href="/feed">Feed</NavLink>
                 <NavLink href="/challenges">Challenges</NavLink>
                 <NavLink href="/leaderboard">Leaderboard</NavLink>
-                <NavLink href="/employers">For Employers</NavLink>
+                <NavLink href="/jobs">For Employers</NavLink>
               </>
             ) : (
               <div className="flex space-x-4">

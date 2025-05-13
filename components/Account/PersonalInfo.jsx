@@ -134,6 +134,7 @@ export default function PersonalInfo() {
             className="w-full bg-gray-100 border border-gray-300 px-4 py-2 rounded-md cursor-not-allowed"
           />
         </div>
+        <div className="flex space-x-10">
         <div>
           <label className=" text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
             Title
@@ -146,6 +147,20 @@ export default function PersonalInfo() {
             placeholder="Frontend-developer"
             className="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-purple-500"
           />
+        </div>
+        <div>
+          <label className=" text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+            <FaGithub /> GitHub URL
+          </label>
+          <input
+            type="url"
+            name="githubUrl"
+            onChange={handleChange}
+            value={formData.githubUrl}
+            placeholder="https://github.com/username"
+            className="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
         </div>
 
         <div className="col-span-1 md:col-span-2">
@@ -161,20 +176,6 @@ export default function PersonalInfo() {
             className="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-purple-500"
           />
           <p className="text-gray-400 mt-1">Max 3 skills</p>
-        </div>
-
-        <div>
-          <label className=" text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
-            <FaGithub /> GitHub URL
-          </label>
-          <input
-            type="url"
-            name="githubUrl"
-            onChange={handleChange}
-            value={formData.githubUrl}
-            placeholder="https://github.com/username"
-            className="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-purple-500"
-          />
         </div>
         <div className="flex flex-col">
           <label htmlFor="bio">
