@@ -6,6 +6,7 @@ import { Star, Zap, CircleDot } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useUser } from '@/context/UserContext';
+import { useAuth } from '@/context/authContext';
 
 const bucketId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_STORAGE_ID;
 const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
@@ -14,6 +15,7 @@ export default function PostCard({ user, projects }) {
   const { calculateUserMatchStrength } = useUser();
   const projectsArray = Array.isArray(projects) ? projects : [projects];
   const matchData = useMemo(() => calculateUserMatchStrength(user, projectsArray), [user, projectsArray]);
+  // const { user } = useAuth
 
   return (
     <div className="overflow-hidden shadow-lg bg-white border border-gray-100 rounded-xl hover:shadow-xl transition-all duration-300">

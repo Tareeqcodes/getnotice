@@ -40,12 +40,14 @@ export default function Page() {
 
     const fetchProjects = async () => {
       try {
+        console.log('Fetching projects for user id:', id)
         const projectsResponse = await databases.listDocuments(
           process.env.NEXT_PUBLIC_APPWRITE_DB_ID,
           process.env.NEXT_PUBLIC_APPWRITE_PROJECT_COLLECTION_ID,
-          [Query.equal('user_id', user.$id)]
+          [Query.equal('user_id', id)]
         );
         setUserProjects(projectsResponse.documents || []);
+        console.log(projectsResponse.documents)
       } catch (error) {
         console.log('Error fetching projects:', error);
       } finally {
