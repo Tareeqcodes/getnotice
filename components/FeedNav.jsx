@@ -32,7 +32,8 @@ export default function FeedNav() {
     }, [activeTab, user]);
     
     const fetchUserProjects = async () => {
-        if (!user) return;
+        if (!user) 
+            return;
         
         setLoadingProjects(true);
         try {
@@ -123,7 +124,7 @@ export default function FeedNav() {
                             jobs={jobs} 
                             loading={loadingJobs} 
                             error={jobsError} 
-                        />
+                        /> 
                 )}
                 {activeTab === 'project' && (
                     <div className="p-4">

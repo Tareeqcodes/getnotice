@@ -27,19 +27,15 @@ return (
 
           {/* Navigation Links */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-8">
-            {user ? (
+            {user && (
               <>
                 <NavLink href="/feed">Feed</NavLink>
                 <NavLink href="/challenges">Challenges</NavLink>
                 <NavLink href="/leaderboard">Leaderboard</NavLink>
                 <NavLink href="/jobs">For Employers</NavLink>
               </>
-            ) : (
-              <div className="flex space-x-4">
-                <NavLink href="/about">How It Works</NavLink>
-                <NavLink href="/pricing">Pricing</NavLink>
-              </div>
-            )}
+            )
+            }
           </div>
 
           <div className="flex items-center">

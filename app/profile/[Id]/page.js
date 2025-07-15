@@ -10,7 +10,6 @@ import UserProject from '@/components/DevProfile/UserProject';
 import UserSkill from '@/components/DevProfile/UserSkill';
 import Impact from '@/components/DevProfile/Impact';
 import Spinner from '@/components/Spinner';
-import { useAuth } from '@/context/authContext';
 
 export default function Page() {
   const [activeTab, setActiveTab] = useState('showcase');
@@ -20,7 +19,7 @@ export default function Page() {
   const [userProjects, setUserProjects] = useState([]);
   const { calculateUserMatchStrength } = useUser();
   const [loading, setLoading] = useState(true);
-  const {user} = useAuth()
+ 
 
   useEffect(() => {
     const fetchUser = async () => {
