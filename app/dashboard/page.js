@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import Account from '@/components/Account/Account'
 import PersonalInfo from '@/components/Account/PersonalInfo'
 
